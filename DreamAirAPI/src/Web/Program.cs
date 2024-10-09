@@ -24,9 +24,18 @@ builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite(c
 builder.Services.AddScoped<IFlightRepository , FlightRepository>();
 builder.Services.AddScoped<IFlightService, FlightService>();
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost5173",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:5173")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
 var app = builder.Build();
-
+app.UseCors("AllowLocalhost5173");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
