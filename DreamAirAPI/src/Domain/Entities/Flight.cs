@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Domain.Entities
 {
     public class Flight
@@ -18,8 +19,17 @@ namespace Domain.Entities
         public DateTime date { get; set; }
         public string timeDeparture { get; set; }
         public string timeArrival { get; set; }
+        public string duration { get; set; }  
         public int totalAmount { get; set; }
         public float priceDefault { get; set; }
         public string airline { get; set; }
+
+        public static string CalculateDuration (string timeArrival, string timeDeparture)
+        {
+            DateTime dep = DateTime.Parse(timeDeparture);
+            DateTime arr = DateTime.Parse(timeArrival);
+            TimeSpan duration = arr - dep;
+            return $"{(int)duration.TotalHours:D2}:{duration.Minutes:D2}Hs"; 
+        }
     }
 }

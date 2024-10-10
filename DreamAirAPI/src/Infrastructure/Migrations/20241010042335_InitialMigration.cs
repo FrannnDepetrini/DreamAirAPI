@@ -19,9 +19,10 @@ namespace Infrastructure.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     departure = table.Column<string>(type: "TEXT", nullable: false),
                     arrival = table.Column<string>(type: "TEXT", nullable: false),
-                    date = table.Column<DateOnly>(type: "date", nullable: false),
+                    date = table.Column<DateTime>(type: "date", nullable: false),
                     timeDeparture = table.Column<string>(type: "TEXT", nullable: false),
                     timeArrival = table.Column<string>(type: "TEXT", nullable: false),
+                    duration = table.Column<string>(type: "TEXT", nullable: false),
                     totalAmount = table.Column<int>(type: "INTEGER", nullable: false),
                     priceDefault = table.Column<float>(type: "REAL", nullable: false),
                     airline = table.Column<string>(type: "TEXT", nullable: false)

@@ -26,12 +26,14 @@ namespace Web.Controllers
         [HttpPost("[action]")]
         public IActionResult Create(FlightRequest flight)
         {
+            string duration = Flight.CalculateDuration(flight.timeArrival, flight.timeDeparture);
             return Ok(_flightService.Create(new Flight{ 
                 departure= flight.departure,
                 arrival = flight.arrival,
                 date = flight.date,
                 timeDeparture = flight.timeDeparture,
                 timeArrival = flight.timeArrival,
+                duration = duration,
                 totalAmount = flight.totalAmount,
                 priceDefault = flight.priceDefault,
                 airline = flight.airline,

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20241002210841_InitialMigration")]
+    [Migration("20241010042335_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -34,10 +34,14 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly>("date")
+                    b.Property<DateTime>("date")
                         .HasColumnType("date");
 
                     b.Property<string>("departure")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("duration")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

@@ -31,10 +31,14 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly>("date")
+                    b.Property<DateTime>("date")
                         .HasColumnType("date");
 
                     b.Property<string>("departure")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("duration")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
