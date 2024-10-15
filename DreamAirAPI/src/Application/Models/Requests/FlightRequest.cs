@@ -20,7 +20,9 @@ namespace Application.Models.Requests
         [Required]
         public string timeArrival { get; set; }
         [Required]
-        public int totalAmount { get; set; }
+        public int totalAmountEconomic { get; set; }
+        [Required]
+        public int totalAmountFirstClass { get; set; }
         [Required]
         public float priceDefault { get; set; }
         [Required]

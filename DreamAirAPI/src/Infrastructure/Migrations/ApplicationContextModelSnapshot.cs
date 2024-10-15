@@ -53,7 +53,10 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("totalAmount")
+                    b.Property<int>("totalAmountEconomic")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("totalAmountFirstClass")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("id");

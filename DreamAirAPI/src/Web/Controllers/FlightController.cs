@@ -3,6 +3,7 @@ using Application.Models.Requests;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Web.Controllers
 {
@@ -26,20 +27,18 @@ namespace Web.Controllers
         [HttpPost("[action]")]
         public IActionResult Create(FlightRequest flight)
         {
-            string duration = Flight.CalculateDuration(flight.timeArrival, flight.timeDeparture);
-            return Ok(_flightService.Create(new Flight{ 
-                departure= flight.departure,
+            Flight flight1 = new Flight{
+                departure = flight.departure,
                 arrival = flight.arrival,
                 date = flight.date,
                 timeDeparture = flight.timeDeparture,
                 timeArrival = flight.timeArrival,
-                duration = duration,
-                totalAmount = flight.totalAmount,
+                totalAmountEconomic = flight.totalAmountEconomic,
+                totalAmountFirstClass = flight.totalAmountFirstClass,
                 priceDefault = flight.priceDefault,
-                airline = flight.airline,
-
-
-            }));
+                airline = flight.airline, };
+            flight1.CalculateDuration();
+            return Ok(_flightService.Create(flight1));
         }
 
         [HttpDelete("[action]")]

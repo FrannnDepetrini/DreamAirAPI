@@ -20,16 +20,24 @@ namespace Domain.Entities
         public string timeDeparture { get; set; }
         public string timeArrival { get; set; }
         public string duration { get; set; }  
-        public int totalAmount { get; set; }
+        public int totalAmountEconomic { get; set; }
+        public int totalAmountFirstClass { get; set; }
         public float priceDefault { get; set; }
         public string airline { get; set; }
 
-        public static string CalculateDuration (string timeArrival, string timeDeparture)
-        {
-            DateTime dep = DateTime.Parse(timeDeparture);
-            DateTime arr = DateTime.Parse(timeArrival);
-            TimeSpan duration = arr - dep;
-            return $"{(int)duration.TotalHours:D2}:{duration.Minutes:D2}Hs"; 
+        public void CalculateDuration() { 
+                TimeSpan dep = TimeSpan.Parse(timeDeparture);
+                TimeSpan arr = TimeSpan.Parse(timeArrival);
+                TimeSpan durationCalculated;
+                if (arr > dep)
+                {
+                    durationCalculated = arr - dep;
+                }
+                else
+                {
+                    durationCalculated = (arr + TimeSpan.FromDays(1) - dep);
+                }
+                this.duration = $"{(int)durationCalculated.TotalHours:D2}:{durationCalculated.Minutes:D2}Hs";
         }
     }
 }

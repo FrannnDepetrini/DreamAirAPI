@@ -23,7 +23,8 @@ namespace Infrastructure.Migrations
                     timeDeparture = table.Column<string>(type: "TEXT", nullable: false),
                     timeArrival = table.Column<string>(type: "TEXT", nullable: false),
                     duration = table.Column<string>(type: "TEXT", nullable: false),
-                    totalAmount = table.Column<int>(type: "INTEGER", nullable: false),
+                    totalAmountEconomic = table.Column<int>(type: "INTEGER", nullable: false),
+                    totalAmountFirstClass = table.Column<int>(type: "INTEGER", nullable: false),
                     priceDefault = table.Column<float>(type: "REAL", nullable: false),
                     airline = table.Column<string>(type: "TEXT", nullable: false)
                 },
