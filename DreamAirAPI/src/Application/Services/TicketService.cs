@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Domain.Entities;
 using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    internal class TicketService: ITicketService
+    public class TicketService: ITicketService
     {
 
         private readonly ITicketRepository _ticketRepository;
@@ -16,6 +17,9 @@ namespace Application.Services
         {
             _ticketRepository = ticketRepository;
         }
-        public TicketService() { }
+
+        public int Create(Ticket ticket) { 
+            return _ticketRepository.Create(ticket);
+        }
     }
 }

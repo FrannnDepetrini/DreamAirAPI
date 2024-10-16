@@ -12,10 +12,10 @@ namespace Web.Controllers
     public class FlightController : ControllerBase
     {
         private readonly IFlightService _flightService;
-        public FlightController (IFlightService flightService)
+        public FlightController(IFlightService flightService)
         {
             _flightService = flightService;
-        } 
+        }
         [HttpGet("[action]")]
         public IActionResult Get()
         {
@@ -27,7 +27,7 @@ namespace Web.Controllers
             return Ok(_flightService.GetById(id));
         }
         [HttpPost("[action]")]
-        public IActionResult Create(FlightRequest flight)
+        public IActionResult Create([FromQuery] FlightRequest flight)
         {
             Flight flight1 = new Flight{
                 departure = flight.departure,

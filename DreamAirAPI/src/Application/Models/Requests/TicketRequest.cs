@@ -23,6 +23,6 @@ namespace Application.Models.Requests
         public string UserLastName { get; set; }
 
         [Required]
-        public Flight flight { get; set; }
+        public int flightId { get; set; }
     }
 }

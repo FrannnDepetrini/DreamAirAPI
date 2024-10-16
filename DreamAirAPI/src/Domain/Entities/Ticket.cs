@@ -12,7 +12,7 @@ namespace Domain.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Id { get; set; }
+        public int id { get; set; }
         public string Seat { get; set; } //numero de asiento
         public string classSeat{ get; set; }
         public string State { get; set; }
@@ -22,8 +22,7 @@ namespace Domain.Entities
         
         public Flight flight { get; set; }
         
-        
-        public void CalculatePrice( string classSeat)
+        public void CalculatePrice()
         {
             if (classSeat == "Economic") 
             { Price = flight.priceDefault * 1.3; } 
@@ -32,7 +31,7 @@ namespace Domain.Entities
             
             
         }
-        public void SeatSelected(string classSeat)
+        public void SeatSelected()
         {
             if (classSeat == "Economic")
             {

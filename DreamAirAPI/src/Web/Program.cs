@@ -24,6 +24,9 @@ builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite(c
 builder.Services.AddScoped<IFlightRepository , FlightRepository>();
 builder.Services.AddScoped<IFlightService, FlightService>();
 
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+builder.Services.AddScoped<ITicketService, TicketService>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost5173",
