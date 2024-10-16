@@ -7,7 +7,9 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Web.Controllers
 {
-    public class FlightController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    public class FlightController : ControllerBase
     {
         private readonly IFlightService _flightService;
         public FlightController (IFlightService flightService)

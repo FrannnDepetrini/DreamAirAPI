@@ -24,7 +24,31 @@ namespace Domain.Entities
         public int totalAmountFirstClass { get; set; }
         public float priceDefault { get; set; }
         public string airline { get; set; }
+        public List<Ticket>  tickets { get; set; }
 
+        public int freeEconomicSeats { get; set; }
+        public int freeFirstClassSeats { get; set; }
+        public void AddTicket(Ticket ticket)
+        {
+            tickets.Add(ticket);
+
+        }
+
+        public void CalculateSeat()
+        {
+            tickets.ForEach(tks =>
+            {
+                if (tks.classSeat == "Economic")
+                {
+                    freeEconomicSeats = totalAmountEconomic - 1;
+                }
+                else
+                {
+                    freeFirstClassSeats = totalAmountFirstClass - 1;
+                }
+            });
+
+        }
         public void CalculateDuration() { 
                 TimeSpan dep = TimeSpan.Parse(timeDeparture);
                 TimeSpan arr = TimeSpan.Parse(timeArrival);
