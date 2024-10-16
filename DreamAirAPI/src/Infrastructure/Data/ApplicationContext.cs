@@ -13,6 +13,8 @@ namespace Infrastructure.Data
     {
         public DbSet<Flight> Flights { get; set; }
 
+        public DbSet<Ticket> Ticket { get; set; }
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -20,6 +22,7 @@ namespace Infrastructure.Data
             modelBuilder.Entity<Flight>()
                 .Property(f => f.date)
                 .HasColumnType("date"); 
+           
         }
     }
 }

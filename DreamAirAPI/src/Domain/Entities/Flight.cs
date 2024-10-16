@@ -31,24 +31,36 @@ namespace Domain.Entities
         public void AddTicket(Ticket ticket)
         {
             tickets.Add(ticket);
-
+            CalculateSeat();
         }
 
+        //public void CalculateSeat()
+        //{
+        //    tickets.ForEach(tks =>
+        //    {
+        //        if (tks.classSeat == "Economic")
+        //        {
+        //            freeEconomicSeats = totalAmountEconomic - 1;
+        //        }
+        //        else
+        //        {
+        //            freeFirstClassSeats = totalAmountFirstClass - 1;
+        //        }
+
+        //    });
+
+        //}
         public void CalculateSeat()
         {
-            tickets.ForEach(tks =>
-            {
-                if (tks.classSeat == "Economic")
-                {
-                    freeEconomicSeats = totalAmountEconomic - 1;
-                }
-                else
-                {
-                    freeFirstClassSeats = totalAmountFirstClass - 1;
-                }
-            });
+            // Contar cuántos asientos económicos y de primera clase ya están ocupados
+            int occupiedEconomicSeats = tickets.Count(t => t.classSeat == "Economic");
+            int occupiedFirstClassSeats = tickets.Count(t => t.classSeat == "FirstClass");
 
+            // Calcular los asientos libres restando los ocupados del total
+            freeEconomicSeats = totalAmountEconomic - occupiedEconomicSeats;
+            freeFirstClassSeats = totalAmountFirstClass - occupiedFirstClassSeats;
         }
+
         public void CalculateDuration() { 
                 TimeSpan dep = TimeSpan.Parse(timeDeparture);
                 TimeSpan arr = TimeSpan.Parse(timeArrival);

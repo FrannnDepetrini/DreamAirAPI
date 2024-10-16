@@ -16,7 +16,7 @@ namespace Application.Services
         {
             _flightRepository = flightRepository;
         }
-        public FlightService() { }
+        
 
         public List<Flight> Get()
         {

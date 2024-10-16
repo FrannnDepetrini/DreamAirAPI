@@ -13,30 +13,36 @@ namespace Domain.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
-        public string Seat { get; set; }
+        public string Seat { get; set; } //numero de asiento
         public string classSeat{ get; set; }
         public string State { get; set; }
         public double Price { get; set; }
         public string UserName { get; set; }
         public string UserLastName { get; set; }
-        public DateTime date { get; set; }
-        public string timeDeparture { get; set; }
-        public string departure { get; set; }
-        public string arrival { get; set; }
-        public Flight flightCurrent { get; set; }
-        public Ticket(Flight flight)
-        {
-            flightCurrent = flight;
-        }
-        public void CalculatePrice(double price, string classSeat)
+        
+        public Flight flight { get; set; }
+        
+        
+        public void CalculatePrice( string classSeat)
         {
             if (classSeat == "Economic") 
-            { Price = price * 1.3; } 
+            { Price = flight.priceDefault * 1.3; } 
             else 
-            { Price = price * 1.5; }
+            { Price = flight.priceDefault * 1.5; }
+            
             
         }
-
+        public void SeatSelected(string classSeat)
+        {
+            if (classSeat == "Economic")
+            {
+                Seat = "E" + flight.freeEconomicSeats;
+            }
+            else
+            {
+                Seat = "F" + flight.freeFirstClassSeats;
+            }
+        }
 
 
     }
