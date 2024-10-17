@@ -7,8 +7,13 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-    public interface IUserClient
+    public interface IUserClientService
     {
         int Create(UserClient client);
+
+        
+        UserClient GetById(int id);
+
+        
     }
 }

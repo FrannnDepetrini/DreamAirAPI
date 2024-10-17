@@ -14,9 +14,9 @@ namespace Domain.Entities
         public int dni {  get; set; }
         public int phone { get; set; }
         public int age { get; set; }
-        public List<Ticket> tickets { get; set; }
+        public List<Ticket> tickets { get; set; } = new List<Ticket>();
 
-        public void buyTicket(string classSeat, Flight flight)
+        public Ticket buyTicket(string classSeat, Flight flight)
         {
 
             Ticket ticket1 = new Ticket
@@ -26,8 +26,9 @@ namespace Domain.Entities
                 user = this,
                 flight = flight
             };
-            tickets.Add(ticket1);
-            flight.AddTicket(ticket1);
+            //tickets.Add(ticket1);
+            //flight.AddTicket(ticket1);
+            return ticket1;
         }
     }
 }

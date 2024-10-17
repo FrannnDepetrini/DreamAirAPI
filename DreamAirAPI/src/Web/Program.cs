@@ -27,6 +27,10 @@ builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 builder.Services.AddScoped<ITicketService, TicketService>();
 
+builder.Services.AddScoped<IUserClientRepository, UserClientRepository>();
+builder.Services.AddScoped<IUserClientService, UserClientService>();
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost5173",
