@@ -23,8 +23,7 @@ namespace Domain.Entities
             {
                 classSeat = classSeat,
                 State = "false",
-                UserName = name,
-                UserLastName = lastName,
+                user = this,
                 flight = flight
             };
             tickets.Add(ticket1);

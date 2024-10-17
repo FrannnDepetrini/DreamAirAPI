@@ -14,12 +14,10 @@ namespace Domain.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
         public string Seat { get; set; } //numero de asiento
-        public string classSeat{ get; set; }
+        public string classSeat { get; set; }
         public string State { get; set; }
         public double Price { get; set; }
-        public string UserName { get; set; }
-        public string UserLastName { get; set; }
-        
+        public UserClient user { get; set; }
         public Flight flight { get; set; }
         
         public void CalculatePrice()

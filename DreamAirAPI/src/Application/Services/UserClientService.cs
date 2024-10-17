@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    //public class UserClientService
-    //{
+    public class UserClientService
+    {
 
-    //}
+    }
 }
