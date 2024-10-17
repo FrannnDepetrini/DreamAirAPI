@@ -16,11 +16,11 @@ namespace Application.Models.Requests
         [Required]
         public string State { get; set; }
 
-         [Required]
-        public string UserName { get; set; }
+        // [Required]
+        //public string UserName { get; set; }
 
-        [Required]
-        public string UserLastName { get; set; }
+        //[Required]
+        //public string UserLastName { get; set; }
 
         [Required]
         public int flightId { get; set; }

@@ -67,7 +67,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Flights");
+                    b.ToTable("Flights", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Ticket", b =>
@@ -103,7 +103,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("userid");
 
-                    b.ToTable("Ticket");
+                    b.ToTable("Ticket", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.UserClient", b =>
@@ -143,7 +143,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("UserClients");
+                    b.ToTable("UserClients", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Ticket", b =>
