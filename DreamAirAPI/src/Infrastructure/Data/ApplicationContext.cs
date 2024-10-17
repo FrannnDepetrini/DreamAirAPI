@@ -14,6 +14,7 @@ namespace Infrastructure.Data
         public DbSet<Flight> Flights { get; set; }
 
         public DbSet<Ticket> Ticket { get; set; }
+        public DbSet<UserClient> UserClients { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 
