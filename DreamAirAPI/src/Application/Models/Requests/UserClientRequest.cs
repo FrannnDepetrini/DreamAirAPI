@@ -22,7 +22,7 @@ namespace Application.Models.Requests
         [Required]
         public int dni { get; set; }
         [Required]
-        public int phone { get; set; }
+        public string phone { get; set; }
         [Required]
         public int age { get; set; }
 

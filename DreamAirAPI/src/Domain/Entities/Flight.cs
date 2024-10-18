@@ -34,22 +34,6 @@ namespace Domain.Entities
             CalculateSeat();
         }
 
-        //public void CalculateSeat()
-        //{
-        //    tickets.ForEach(tks =>
-        //    {
-        //        if (tks.classSeat == "Economic")
-        //        {
-        //            freeEconomicSeats = totalAmountEconomic - 1;
-        //        }
-        //        else
-        //        {
-        //            freeFirstClassSeats = totalAmountFirstClass - 1;
-        //        }
-
-        //    });
-
-        //}
         public void CalculateSeat()
         {
             // Contar cuántos asientos económicos y de primera clase ya están ocupados

@@ -14,7 +14,7 @@ namespace Application.Models
         public string lastName { get; set; }
         public string nationality { get; set; }
         public int dni { get; set; }
-        public int phone { get; set; }
+        public string phone { get; set; }
         public int age { get; set; }
         public List<TicketDto> tickets { get; set; } = new List<TicketDto>();
 
