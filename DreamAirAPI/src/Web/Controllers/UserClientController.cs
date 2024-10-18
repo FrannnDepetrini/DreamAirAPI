@@ -61,9 +61,12 @@ namespace Web.Controllers
                 user = clientFound,
                 flight = flightFound                
             };
+
+            flightFound.CalculateSeat(ticket.classSeat);
             ticket1.CalculatePrice();
             ticket1.SeatSelected();
-            return Ok(_ticketService.Create(ticket1));
+            _ticketService.Create(ticket1);
+            return Ok();
         }
     }
         

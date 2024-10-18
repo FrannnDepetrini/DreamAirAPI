@@ -21,7 +21,8 @@ namespace Web.Controllers
         [HttpGet("[action]")]
         public IActionResult Get()
         {
-            return Ok(_flightService.Get());
+            var listMapped = _flightService.Get().Select((f) => FlightDto.Create(f)).ToList();
+            return Ok(listMapped);
         }
         [HttpGet("[action]")]
         public IActionResult GetById(int id)

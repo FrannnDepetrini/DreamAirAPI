@@ -23,10 +23,10 @@ namespace Infrastructure.Data
         public List<Flight> Get() {
             
             
-            return _context.Set<Flight>().ToList() ;
+            return _context.Set<Flight>().Include(f => f.tickets).ThenInclude(t => t.user).ToList();
         }
         public Flight GetById(int id) {
-            return _context.Set<Flight>().Include(f => f.tickets).FirstOrDefault(f => f.id == id);
+            return _context.Set<Flight>().Include(f => f.tickets).ThenInclude(t => t.user).FirstOrDefault(f => f.id == id);
         }
 
         public int Delete(int id) {

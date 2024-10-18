@@ -26,24 +26,46 @@ namespace Domain.Entities
         public string airline { get; set; }
         public List<Ticket>  tickets { get; set; }
 
-        public int freeEconomicSeats { get; set; }
-        public int freeFirstClassSeats { get; set; }
-        public void AddTicket(Ticket ticket)
-        {
-            tickets.Add(ticket);
-            CalculateSeat();
-        }
+        public int freeEconomicSeats { get; set; } = 0;
+        public int freeFirstClassSeats { get; set; } = 0;
+        //public void AddTicket(Ticket ticket)
+        //{
+        //    tickets.Add(ticket);
+        //    CalculateSeat();
+        //}
 
-        public void CalculateSeat()
+        public string CalculateSeat(string classSeat)
         {
-            // Contar cuántos asientos económicos y de primera clase ya están ocupados
-            int occupiedEconomicSeats = tickets.Count(t => t.classSeat == "Economic");
-            int occupiedFirstClassSeats = tickets.Count(t => t.classSeat == "FirstClass");
+            //// Contar cuántos asientos económicos y de primera clase ya están ocupados
+            //int occupiedEconomicSeats = tickets.Count(t => t.classSeat == "Economic");
+            //int occupiedFirstClassSeats = tickets.Count(t => t.classSeat == "FirstClass");
 
-            // Calcular los asientos libres restando los ocupados del total
-            freeEconomicSeats = totalAmountEconomic - occupiedEconomicSeats;
-            freeFirstClassSeats = totalAmountFirstClass - occupiedFirstClassSeats;
+            //// Calcular los asientos libres restando los ocupados del total
+            //freeEconomicSeats = totalAmountEconomic - occupiedEconomicSeats;
+            //freeFirstClassSeats = totalAmountFirstClass - occupiedFirstClassSeats;
+            if (classSeat == "Economic")
+            {
+                if (freeEconomicSeats == totalAmountEconomic)
+                {
+                    return null;
+                } else
+                {
+                    freeEconomicSeats = freeEconomicSeats + 1;
+                }
+            } else if (classSeat == "FirstClass")
+            {
+                if (freeEconomicSeats == totalAmountEconomic)
+                {
+                    return "No hay mas asientos disponibles";
+                }
+                else
+                {
+                    freeFirstClassSeats = freeFirstClassSeats + 1;
+                }
+            };
+            return "Compra de asiento exitosa";
         }
+        
 
         public void CalculateDuration() { 
                 TimeSpan dep = TimeSpan.Parse(timeDeparture);
