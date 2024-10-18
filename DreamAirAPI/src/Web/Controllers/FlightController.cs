@@ -54,9 +54,10 @@ namespace Web.Controllers
         }
 
         [HttpPut("[action]")]
-        public IActionResult Update(int id,Flight flight)
+        public IActionResult Update([FromBody] FlightUpdateRequest flight)
         {
-            return Ok(_flightService.Update(id, flight));
+            Flight flight1 = new Flight { date = flight.date, timeDeparture = flight.timeDeparture, timeArrival = flight.timeArrival };
+            return Ok(_flightService.Update(flight.flightId, flight1));
         }
     }
 }

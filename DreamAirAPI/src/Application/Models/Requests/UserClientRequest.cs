@@ -17,11 +17,12 @@ namespace Application.Models.Requests
         public string name { get; set; }
         [Required] 
         public string lastName { get; set; }
-        [Required]
+        
         public string nationality { get; set; }
+
         [Required]
         public int dni { get; set; }
-        [Required]
+        
         public string phone { get; set; }
         [Required]
         public int age { get; set; }

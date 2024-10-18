@@ -11,9 +11,10 @@ namespace Application.Interfaces
     {
         int Create(UserClient client);
 
+        List<UserClient> Get();
         
         UserClient GetById(int id);
 
-        
+        int Delete(int id);
     }
 }

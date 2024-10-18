@@ -15,6 +15,6 @@ namespace Domain.Interfaces
 
         int Delete(int id);
 
-        int Update(Flight flight);
+        int Update(int id, Flight flight);
     }
 }

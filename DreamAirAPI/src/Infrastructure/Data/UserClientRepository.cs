@@ -26,14 +26,30 @@ namespace Infrastructure.Data
         }
         
 
+        public List<UserClient> Get()
+        {
+            return _context.Set<UserClient>().Include(uc => uc.tickets).ThenInclude(t => t.flight).ToList();
+        }
 
         
         public UserClient GetById(int id) 
         {
-            return _context.Set<UserClient>().Include(uc => uc.tickets).ThenInclude(t=>t.flight).FirstOrDefault(uc => uc.id == id);
+            return _context.Set<UserClient>().Include(uc => uc.tickets).ThenInclude(t => t.flight).FirstOrDefault(uc => uc.id == id);
 
         }
         
+        public int Delete(int id)
+        {
+            UserClient? clientFound = _context.Set<UserClient>().Find(id);
 
+            if (clientFound != null) {
+                _context.Set<UserClient>().Remove(clientFound);
+                _context.SaveChanges();
+                return 1;
+                } else
+            {
+                return 0;
+            }
+        } 
     }
 }

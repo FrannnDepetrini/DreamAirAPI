@@ -22,7 +22,12 @@ namespace Web.Controllers
             _flightService = flightService;
             _ticketService = ticketService;
         }
-
+        [HttpGet("[action]")]
+        public IActionResult Get()
+        {
+            var listMapped = _userClientService.Get().Select((uc) => UserClientDto.Create(uc)).ToList();
+            return Ok(listMapped);
+        }
 
 
         [HttpGet("[action]")]
@@ -65,8 +70,13 @@ namespace Web.Controllers
             flightFound.CalculateSeat(ticket.classSeat);
             ticket1.CalculatePrice();
             ticket1.SeatSelected();
-            _ticketService.Create(ticket1);
-            return Ok();
+            return Ok(_ticketService.Create(ticket1));
+        }
+
+        [HttpDelete("[action]")]
+        public IActionResult Delete(int id)
+        {
+            return Ok(_userClientService.Delete(id));
         }
     }
         

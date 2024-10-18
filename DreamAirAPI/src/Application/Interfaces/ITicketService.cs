@@ -10,8 +10,8 @@ namespace Application.Interfaces
     public interface ITicketService
     {
         int Create(Ticket ticket);
-       
 
-        
+        //int Update(TicketUpdateRequest ticket);
+
     }
 }

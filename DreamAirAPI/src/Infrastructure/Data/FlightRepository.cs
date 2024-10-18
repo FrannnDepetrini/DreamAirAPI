@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Models;
+using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -41,10 +42,18 @@ namespace Infrastructure.Data
             return 0;
         }
 
-        public int Update(Flight flight) {
-            _context.Set<Flight>().Update(flight);
-            _context.SaveChanges();
+        public int Update(int id, Flight flight) {
+            Flight flightFound = _context.Set<Flight>().Find(id);
+            if (flightFound != null)
+            {
+                flightFound.date = flight.date;
+                flightFound.timeArrival = flight.timeArrival;
+                flightFound.timeDeparture = flight.timeDeparture;
+                _context.Set<Flight>().Update(flightFound);
+                _context.SaveChanges();
             return 1;
+            }
+            return 0;
         }
     }
 }

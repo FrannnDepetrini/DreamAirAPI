@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Application.Models;
 using Domain.Entities;
 using Domain.Interfaces;
 using System;
@@ -40,7 +41,7 @@ namespace Application.Services
 
         public int Update(int id ,Flight flight)
         {
-            return _flightRepository.Update(flight);
+            return _flightRepository.Update(id, flight);
         }
 
     }

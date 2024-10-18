@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿
+using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 using System;
@@ -23,13 +24,18 @@ namespace Application.Services
             return _userClientRepository.Create(client);
         }
 
-
+        public List<UserClient> Get() {
+            return _userClientRepository.Get();
+        }
        
         public UserClient GetById(int id) 
         {
             return _userClientRepository.GetById(id);
         }
 
-
+        public int Delete(int id)
+        {
+            return _userClientRepository.Delete(id);
+        }
     }
 }

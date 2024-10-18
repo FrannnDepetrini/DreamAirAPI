@@ -10,6 +10,7 @@ namespace Application.Models
 {
     public class UserClientDto
     {
+        public int id {  get; set; }
         public string name { get; set; }
         public string lastName { get; set; }
         public string nationality { get; set; }
@@ -28,6 +29,7 @@ namespace Application.Models
             });
             return new UserClientDto
             {
+                id = userClient.id,
                 name = userClient.name,
                 lastName = userClient.lastName,
                 nationality = userClient.nationality,
