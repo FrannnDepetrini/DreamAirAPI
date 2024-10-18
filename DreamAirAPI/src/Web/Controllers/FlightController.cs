@@ -1,5 +1,7 @@
 ﻿using Application.Interfaces;
+using Application.Models;
 using Application.Models.Requests;
+using Application.Services;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -24,10 +26,11 @@ namespace Web.Controllers
         [HttpGet("[action]")]
         public IActionResult GetById(int id)
         {
-            return Ok(_flightService.GetById(id));
+            return Ok(FlightDto.Create(_flightService.GetById(id)));
         }
+       
         [HttpPost("[action]")]
-        public IActionResult Create([FromQuery] FlightRequest flight)
+        public IActionResult Create(FlightRequest flight)
         {
             Flight flight1 = new Flight{
                 departure = flight.departure,

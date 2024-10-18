@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace Infrastructure.Data
             return _context.Set<Flight>().ToList() ;
         }
         public Flight GetById(int id) {
-            return _context.Set<Flight>().Find(id);
+            return _context.Set<Flight>().Include(f => f.tickets).FirstOrDefault(f => f.id == id);
         }
 
         public int Delete(int id) {
