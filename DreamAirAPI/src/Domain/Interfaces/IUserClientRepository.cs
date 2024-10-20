@@ -13,6 +13,7 @@ namespace Domain.Interfaces
 
         List<UserClient> Get();
         UserClient GetById(int id);
+        UserClient GetByEmail(string email);
 
         int Delete(int id);
     }

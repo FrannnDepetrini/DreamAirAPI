@@ -48,7 +48,7 @@ namespace Web.Controllers
         }
 
         [HttpDelete("[action]")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete([FromBody]int id)
         {
             return Ok(_flightService.Delete(id));
         }

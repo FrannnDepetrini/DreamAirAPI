@@ -33,6 +33,11 @@ namespace Application.Services
             return _userClientRepository.GetById(id);
         }
 
+        public UserClient GetByEmail(string email)
+        {
+            return _userClientRepository.GetByEmail(email);
+        }
+
         public int Delete(int id)
         {
             return _userClientRepository.Delete(id);

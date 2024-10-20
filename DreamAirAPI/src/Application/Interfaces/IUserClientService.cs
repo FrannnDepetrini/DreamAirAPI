@@ -15,6 +15,8 @@ namespace Application.Interfaces
         
         UserClient GetById(int id);
 
+        UserClient GetByEmail(string email);
+
         int Delete(int id);
     }
 }

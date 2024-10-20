@@ -3,6 +3,7 @@ using Application.Models;
 using Application.Models.Requests;
 using Application.Services;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,12 +16,14 @@ namespace Web.Controllers
         private readonly IUserClientService _userClientService;
         private readonly IFlightService _flightService;
         private readonly ITicketService _ticketService;
+        private readonly IAutenticationService _authenticationService;
 
-        public UserClientController(IUserClientService userClientService, IFlightService flightService, ITicketService ticketService)
+        public UserClientController(IUserClientService userClientService, IFlightService flightService, ITicketService ticketService, IAutenticationService authenticationService)
         {
             _userClientService = userClientService;
             _flightService = flightService;
             _ticketService = ticketService;
+            _authenticationService = authenticationService;
         }
         [HttpGet("[action]")]
         public IActionResult Get()
@@ -36,6 +39,12 @@ namespace Web.Controllers
             return Ok(UserClientDto.Create(_userClientService.GetById(id)));
         }
 
+        [HttpGet("[action]")]
+        public IActionResult GetByEmail(string email) 
+        {
+            return Ok(UserClientDto.Create(_userClientService.GetByEmail(email)));
+        }
+
         [HttpPost("[action]")]
         public IActionResult Create(UserClientRequest client)
         {
@@ -43,7 +52,7 @@ namespace Web.Controllers
             UserClient client1 = new UserClient
             {
                 email = client.email,
-                password = client.password,
+                password = _authenticationService.GenerateHash(client.password),
                 name = client.name,
                 lastName = client.lastName,
                 nationality = client.nationality,
@@ -55,6 +64,8 @@ namespace Web.Controllers
         }
 
         [HttpPost("[action]")]
+
+        [Authorize(Roles = "cliente")]
         public IActionResult BuyTicket(TicketRequest ticket)
         {
             Flight? flightFound = _flightService.GetById(ticket.flightId);

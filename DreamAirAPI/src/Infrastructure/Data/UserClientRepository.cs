@@ -37,7 +37,12 @@ namespace Infrastructure.Data
             return _context.Set<UserClient>().Include(uc => uc.tickets).ThenInclude(t => t.flight).FirstOrDefault(uc => uc.id == id);
 
         }
-        
+
+        public UserClient GetByEmail(string email)
+        {
+            return _context.Set<UserClient>().FirstOrDefault(uc => uc.email == email);
+
+        }
         public int Delete(int id)
         {
             UserClient? clientFound = _context.Set<UserClient>().Find(id);
