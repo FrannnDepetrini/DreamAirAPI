@@ -19,7 +19,7 @@ namespace Web.Controllers
         public IActionResult login(LoginRequest user)
         {
 
-            return Ok(new {token = _autenticationService.Authenticate(user)});
+            return Ok(_autenticationService.Authenticate(user));
         }
     }
 }

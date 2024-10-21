@@ -50,9 +50,9 @@ namespace Infrastructure.Services
 
             var userClaims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, userClient.id.ToString()),
-                new Claim(ClaimTypes.Email, userClient.email),
-                new Claim(ClaimTypes.Role, userClient.role)
+                new Claim("ID", userClient.id.ToString()),
+                new Claim("Email", userClient.email),
+                new Claim("Role", userClient.role)
             };
 
             var seccurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_options.SecretForKey));
