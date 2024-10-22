@@ -35,6 +35,9 @@ builder.Services.AddScoped<ITicketService, TicketService>();
 builder.Services.AddScoped<IUserClientRepository, UserClientRepository>();
 builder.Services.AddScoped<IUserClientService, UserClientService>();
 
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+
 builder.Services.AddScoped<IAutenticationService, AutenticationService>();
 builder.Services.Configure<AutenticationServiceOptions>(
      builder.Configuration.GetSection(AutenticationServiceOptions.AutenticacionService)

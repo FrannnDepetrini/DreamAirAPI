@@ -3,6 +3,7 @@ using Application.Models;
 using Application.Models.Requests;
 using Application.Services;
 using Domain.Entities;
+using Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,13 +18,14 @@ namespace Web.Controllers
         private readonly IFlightService _flightService;
         private readonly ITicketService _ticketService;
         private readonly IAutenticationService _authenticationService;
-
+       
         public UserClientController(IUserClientService userClientService, IFlightService flightService, ITicketService ticketService, IAutenticationService authenticationService)
         {
             _userClientService = userClientService;
             _flightService = flightService;
             _ticketService = ticketService;
             _authenticationService = authenticationService;
+            
         }
         [HttpGet("[action]")]
         public IActionResult Get()
@@ -44,6 +46,7 @@ namespace Web.Controllers
         {
             return Ok(UserClientDto.Create(_userClientService.GetByEmail(email)));
         }
+       
 
         [HttpPost("[action]")]
         public IActionResult Create(UserClientRequest client)

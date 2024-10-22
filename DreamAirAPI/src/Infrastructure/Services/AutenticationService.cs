@@ -17,42 +17,45 @@ namespace Infrastructure.Services
 {
     public class AutenticationService : IAutenticationService
     {
-        private readonly IUserClientRepository _userClientRepository;
+        private readonly IUserRepository _userRepository;
 
         private readonly AutenticationServiceOptions _options;
-        public AutenticationService(IUserClientRepository userClientRepository, IOptions<AutenticationServiceOptions> options)
+
+
+        public AutenticationService(IUserRepository userRepository, IOptions<AutenticationServiceOptions> options)
         {
-            _userClientRepository = userClientRepository;
+            _userRepository = userRepository;
             _options = options.Value;
         }
 
-        public UserClient? ValidateUser(LoginRequest user)
+        public User? ValidateUser(LoginRequest userRequest)
         {
-            if (string.IsNullOrEmpty(user.email) || string.IsNullOrEmpty(user.password)) 
+
+            if (string.IsNullOrEmpty(userRequest.email) || string.IsNullOrEmpty(userRequest.password)) 
             {
                 return null;    
             }
 
-            UserClient? userClient = _userClientRepository.GetByEmail(user.email);
+            User? user= _userRepository.GetByEmail(userRequest.email);
 
-            if (userClient == null) return null;
+            if (user == null) return null;
 
-            string passwordHashed = GenerateHash(user.password);
+            string passwordHashed = GenerateHash(userRequest.password);
 
-            if (passwordHashed == userClient.password) return userClient;
+            if (passwordHashed == user.password) return user;
             return null;
         }
 
-        public string Authenticate(LoginRequest user) 
+        public string Authenticate(LoginRequest userRequest) 
         {
-            UserClient? userClient = ValidateUser(user);
-            if (userClient == null) { throw new Exception("User authentication failed"); }
+            User? user = ValidateUser(userRequest);
+            if (user == null) { throw new Exception("User authentication failed"); }
 
             var userClaims = new[]
             {
-                new Claim("ID", userClient.id.ToString()),
-                new Claim("Email", userClient.email),
-                new Claim("Role", userClient.role)
+                new Claim("ID", user.id.ToString()),
+                new Claim("Email", user.email),
+                new Claim("Role", user.role)
             };
 
             var seccurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_options.SecretForKey));

@@ -13,15 +13,17 @@ namespace Application.Services
     public class UserClientService: IUserClientService
     {
         private readonly IUserClientRepository _userClientRepository;
-
+        
         public UserClientService(IUserClientRepository userClientRepository)
         {
              _userClientRepository = userClientRepository;
+            
         }
 
         public int Create(UserClient client)
         {
-            return _userClientRepository.Create(client);
+            
+            return  _userClientRepository.Create(client);
         }
 
         public List<UserClient> Get() {

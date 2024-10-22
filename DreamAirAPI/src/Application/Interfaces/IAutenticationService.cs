@@ -10,9 +10,9 @@ namespace Application.Interfaces
 {
     public interface IAutenticationService
     {
-        UserClient ValidateUser(LoginRequest user);
+        User ValidateUser(LoginRequest userRequest);
 
-        string Authenticate(LoginRequest user);
+        string Authenticate(LoginRequest userRequest);
         string GenerateHash(string password);
     }
 }

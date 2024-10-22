@@ -13,16 +13,15 @@ namespace Infrastructure.Data
     {
         public DbSet<Flight> Flights { get; set; }
 
-        public DbSet<Ticket> Ticket { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
         public DbSet<UserClient> UserClients { get; set; }
 
+        public DbSet<User> Users { get; set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Flight>()
-                .Property(f => f.date)
-                .HasColumnType("date"); 
+            modelBuilder.Entity<User>().UseTptMappingStrategy();
            
         }
     }
