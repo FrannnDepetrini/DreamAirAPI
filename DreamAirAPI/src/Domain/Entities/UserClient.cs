@@ -16,19 +16,18 @@ namespace Domain.Entities
         public int age { get; set; }
         public List<Ticket> tickets { get; set; } = new List<Ticket>();
 
-        public Ticket buyTicket(string classSeat, Flight flight)
-        {
-
-            Ticket ticket1 = new Ticket
-            {
-                classSeat = classSeat,
-                State = "false",
-                user = this,
-                flight = flight
-            };
-            //tickets.Add(ticket1);
-            //flight.AddTicket(ticket1);
-            return ticket1;
-        }
+        //public Ticket buyTicket(string classSeat, Flight flight)
+        //{
+        //    Ticket ticket1 = new Ticket
+        //    {
+        //        classSeat = classSeat,
+        //        State = "false",
+        //        user = this,
+        //        flight = flight
+        //    };
+        //    //tickets.Add(ticket1);
+        //    //flight.AddTicket(ticket1);
+        //    return ticket1;
+        //}
     }
 }

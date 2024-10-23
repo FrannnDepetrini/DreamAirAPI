@@ -5,16 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Interfaces
+namespace Application.Interfaces
 {
-    public interface IUserRepository
+    public interface IUserService
     {
-        List<User> Get();
-        User GetByEmail(string email);
-
         User GetById(int id);
-        
-
-
     }
 }

@@ -19,7 +19,6 @@ namespace Application.Models
         public int totalAmountEconomic { get; set; }
         public int totalAmountFirstClass { get; set; }
         public float priceDefault { get; set; }
-        public string airline { get; set; }
         public int freeEconomicSeats { get; set; }
         public int freeFirstClassSeats { get; set; }
         public List<TicketDto> tickets { get; set; } = new List<TicketDto>();
@@ -42,7 +41,6 @@ namespace Application.Models
                 totalAmountEconomic = flight.totalAmountEconomic,
                 totalAmountFirstClass = flight.totalAmountFirstClass,
                 priceDefault = flight.priceDefault,
-                airline = flight.airline,
                 freeEconomicSeats = flight.freeEconomicSeats,
                 freeFirstClassSeats = flight.freeFirstClassSeats,
                 tickets = listMapped.ToList()

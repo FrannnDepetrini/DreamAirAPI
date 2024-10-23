@@ -28,6 +28,10 @@ namespace Infrastructure.Data
             return _context.Set<User>().FirstOrDefault(u => u.email == email);
         }
 
+        public User GetById(int id)
+        {
+            return _context.Set<User>().Find(id);
+        }
 
 
 

@@ -25,7 +25,7 @@ namespace Domain.Entities
         public float priceDefault { get; set; }
         public string airline { get; set; }
         public List<Ticket>  tickets { get; set; }
-
+        public UserAirline UserAirline { get; set; }
         public int freeEconomicSeats { get; set; } = 0;
         public int freeFirstClassSeats { get; set; } = 0;
         //public void AddTicket(Ticket ticket)

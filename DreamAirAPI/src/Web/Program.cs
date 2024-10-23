@@ -36,7 +36,10 @@ builder.Services.AddScoped<IUserClientRepository, UserClientRepository>();
 builder.Services.AddScoped<IUserClientService, UserClientService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
+builder.Services.AddScoped<IUserAirlineRepository, UserAirlineRepository>();
+builder.Services.AddScoped<IUserAirlineService, UserAirlineService>();
 
 builder.Services.AddScoped<IAutenticationService, AutenticationService>();
 builder.Services.Configure<AutenticationServiceOptions>(

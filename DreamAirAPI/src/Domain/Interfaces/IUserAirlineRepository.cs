@@ -7,14 +7,10 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
-    public interface IUserRepository
+    public interface IUserAirlineRepository
     {
-        List<User> Get();
-        User GetByEmail(string email);
+        List<string> GetAirlines();
 
-        User GetById(int id);
-        
-
-
+        int Create(UserAirline airline);
     }
 }

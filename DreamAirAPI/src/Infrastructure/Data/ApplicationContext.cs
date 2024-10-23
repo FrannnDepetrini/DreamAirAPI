@@ -16,6 +16,7 @@ namespace Infrastructure.Data
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<UserClient> UserClients { get; set; }
 
+        public DbSet<UserAirline> UserAirlines { get; set; }
         public DbSet<User> Users { get; set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 
