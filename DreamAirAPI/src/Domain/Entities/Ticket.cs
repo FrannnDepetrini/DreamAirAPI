@@ -16,19 +16,19 @@ namespace Domain.Entities
         public int id { get; set; }
         public string Seat { get; set; } //numero de asiento
         public string classSeat { get; set; }
-        public string State { get; set; }
+        public string State { get; set; } = "Activo";
         public double Price { get; set; }
         public UserClient user { get; set; }
         public Flight flight { get; set; }
-        
+
         public void CalculatePrice()
         {
-            if (classSeat == "Economic") 
-            { Price = flight.priceDefault * 1.3; } 
-            else 
+            if (classSeat == "Economic")
+            { Price = flight.priceDefault * 1.3; }
+            else
             { Price = flight.priceDefault * 1.5; }
-            
-            
+
+
         }
         public void SeatSelected()
         {

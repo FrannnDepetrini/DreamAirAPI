@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public class TicketService: ITicketService
+    public class TicketService : ITicketService
     {
 
         private readonly ITicketRepository _ticketRepository;
@@ -18,8 +18,19 @@ namespace Application.Services
             _ticketRepository = ticketRepository;
         }
 
-        public int Create(Ticket ticket) { 
-            return _ticketRepository.Create(ticket);
+        public int Create(string classSeat, UserClient client, Flight flight)
+        {
+            Ticket ticket1 = new Ticket
+            {
+                classSeat = classSeat,
+                user = client,
+                flight = flight
+            };
+
+            flight.CalculateSeat(classSeat);
+            ticket1.CalculatePrice();
+            ticket1.SeatSelected();
+            return _ticketRepository.Create(ticket1);
         }
     }
 }

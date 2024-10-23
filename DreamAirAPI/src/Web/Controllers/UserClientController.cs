@@ -7,6 +7,8 @@ using Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
+using System.Security.Claims;
 
 namespace Web.Controllers
 {
@@ -18,14 +20,14 @@ namespace Web.Controllers
         private readonly IFlightService _flightService;
         private readonly ITicketService _ticketService;
         private readonly IAutenticationService _authenticationService;
-       
+
         public UserClientController(IUserClientService userClientService, IFlightService flightService, ITicketService ticketService, IAutenticationService authenticationService)
         {
             _userClientService = userClientService;
             _flightService = flightService;
             _ticketService = ticketService;
             _authenticationService = authenticationService;
-            
+
         }
         [HttpGet("[action]")]
         public IActionResult Get()
@@ -42,11 +44,11 @@ namespace Web.Controllers
         }
 
         [HttpGet("[action]")]
-        public IActionResult GetByEmail(string email) 
+        public IActionResult GetByEmail(string email)
         {
             return Ok(UserClientDto.Create(_userClientService.GetByEmail(email)));
         }
-       
+
 
         [HttpPost("[action]")]
         public IActionResult Create(UserClientRequest client)
@@ -68,23 +70,23 @@ namespace Web.Controllers
 
         [HttpPost("[action]")]
 
-        [Authorize(Roles = "cliente")]
+        [Authorize]
         public IActionResult BuyTicket(TicketRequest ticket)
         {
             Flight? flightFound = _flightService.GetById(ticket.flightId);
-            UserClient? clientFound = _userClientService.GetById(1);
-            Ticket ticket1 = new Ticket
-            {
-                classSeat = ticket.classSeat,
-                State = ticket.State,
-                user = clientFound,
-                flight = flightFound                
-            };
+            if (flightFound == null) return StatusCode(404, "Vuelo no encontrado");
 
-            flightFound.CalculateSeat(ticket.classSeat);
-            ticket1.CalculatePrice();
-            ticket1.SeatSelected();
-            return Ok(_ticketService.Create(ticket1));
+
+            int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "");
+            UserClient? clientFound = _userClientService.GetById(userId);
+            if (clientFound == null) return StatusCode(404, "Cliente no encontrado");
+            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+            if (userRole == "cliente")
+            {
+                return Ok(_ticketService.Create(ticket.classSeat, clientFound, flightFound));
+            }
+            return Forbid();
         }
 
         [HttpDelete("[action]")]
@@ -93,5 +95,5 @@ namespace Web.Controllers
             return Ok(_userClientService.Delete(id));
         }
     }
-        
+
 }

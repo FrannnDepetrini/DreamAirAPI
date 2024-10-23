@@ -31,12 +31,12 @@ namespace Infrastructure.Services
         public User? ValidateUser(LoginRequest userRequest)
         {
 
-            if (string.IsNullOrEmpty(userRequest.email) || string.IsNullOrEmpty(userRequest.password)) 
+            if (string.IsNullOrEmpty(userRequest.email) || string.IsNullOrEmpty(userRequest.password))
             {
-                return null;    
+                return null;
             }
 
-            User? user= _userRepository.GetByEmail(userRequest.email);
+            User? user = _userRepository.GetByEmail(userRequest.email);
 
             if (user == null) return null;
 
@@ -46,16 +46,16 @@ namespace Infrastructure.Services
             return null;
         }
 
-        public string Authenticate(LoginRequest userRequest) 
+        public string Authenticate(LoginRequest userRequest)
         {
             User? user = ValidateUser(userRequest);
             if (user == null) { throw new Exception("User authentication failed"); }
 
             var userClaims = new[]
             {
-                new Claim("ID", user.id.ToString()),
-                new Claim("Email", user.email),
-                new Claim("Role", user.role)
+                new Claim("sub", user.id.ToString()),
+                new Claim("email", user.email),
+                new Claim("role", user.role)
             };
 
             var seccurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_options.SecretForKey));
@@ -74,16 +74,16 @@ namespace Infrastructure.Services
             return new JwtSecurityTokenHandler().WriteToken(jwtConfig);
         }
 
-        public string GenerateHash(string password) 
-        { 
+        public string GenerateHash(string password)
+        {
             using (SHA256 sha256 = SHA256.Create())
             {
                 byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                
+
                 StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++) 
+                for (int i = 0; i < bytes.Length; i++)
                 {
-                    builder.Append(bytes[i].ToString("x2"));    
+                    builder.Append(bytes[i].ToString("x2"));
                 }
                 return builder.ToString();
             }

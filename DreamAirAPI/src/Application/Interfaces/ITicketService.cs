@@ -9,7 +9,7 @@ namespace Application.Interfaces
 {
     public interface ITicketService
     {
-        int Create(Ticket ticket);
+        int Create(string classSeat, UserClient client, Flight flight);
 
         //int Update(TicketUpdateRequest ticket);
 
