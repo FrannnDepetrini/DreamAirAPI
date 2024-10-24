@@ -12,6 +12,7 @@ namespace Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserAirlineController : ControllerBase
     {
         private readonly IUserAirlineService _userAirlineService;
@@ -29,27 +30,55 @@ namespace Web.Controllers
         [HttpGet("[action]")]
         public IActionResult GetAirlines() 
         {
-            return Ok(_userAirlineService.GetAirlines());
+            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+            if (userRole == "airline")
+            {
+                return Ok(_userAirlineService.GetAirlines());
+
+            }
+            return Forbid();
         }
+
         [HttpPost("[action]")]
         public IActionResult Create(UserAirlineRequest airline)
         {
-            return Ok(_userAirlineService.Create(airline));
+            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+            if (userRole == "airline")
+            {
+                return Ok(_userAirlineService.Create(airline));
+
+            }
+            return Forbid();
         }
 
         [HttpGet("[action]")]
-        [Authorize]
+        
         public IActionResult GetFlights()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            return Ok(_userAirlineService.GetFlights(int.Parse(userId)));
+            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+            if (userRole == "airline")
+            {
+                return Ok(_userAirlineService.GetFlights(int.Parse(userId)));
+
+            }
+            return Forbid();
         }
 
         [HttpGet("[action]")]
         public IActionResult GetByEmail(int id)
         {
 
-            return Ok(_userService.GetById(id));
+            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+            if (userRole == "airline")
+            {
+                return Ok(_userService.GetById(id));
+            }
+            return Forbid();
 
         }
 

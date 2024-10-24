@@ -29,7 +29,9 @@ namespace Infrastructure.Data
             modelBuilder.Entity<User>().UseTptMappingStrategy();
 
             modelBuilder.Entity<UserAdmin>().HasData(CreateUserAdminDataSeed());
-           
+            modelBuilder.Entity<UserAirline>().HasData(CreateUserAirlineDataSeed());
+            modelBuilder.Entity<UserClient>().HasData(CreateUserClientDataSeed());
+
         }
 
         
@@ -48,6 +50,75 @@ namespace Infrastructure.Data
             };
         }
 
+        private UserAirline[] CreateUserAirlineDataSeed()
+        {
 
-}
+            return new UserAirline[]
+            {
+                new UserAirline
+                {
+                    id = 2,
+                    name = "Emirates",
+                    email = "Emirates@gmail.com",
+                    password = HashGenerator.GenerateHash("emirates"),
+                    role = "airline"
+                },
+
+                new UserAirline
+                {
+                    id = 3,
+                    name = "Flybondi",
+                    email = "Flybondi@gmail.com",
+                    password = HashGenerator.GenerateHash("Flybondi"),
+                    role = "airline"
+                }
+            };
+        }
+
+
+        private UserClient[] CreateUserClientDataSeed()
+        {
+
+            return new UserClient[]
+            {
+                new UserClient
+                {
+                    id = 4,
+                    email = "joako.tanlon@gmail.com",
+                    password = HashGenerator.GenerateHash("joako"),
+                    name = "Joaquin",
+                    lastName = "Tanlongo",
+                    nationality = "Argentino",
+                    dni = 44290276,
+                    phone = "3412122907",
+                    age = 22
+                },
+                new UserClient
+                {
+                    id = 5,
+                    email = "frandepe7@gmail.com",
+                    password = HashGenerator.GenerateHash("frandepe"),
+                    name = "Francisco",
+                    lastName = "Depetrini",
+                    nationality = "Argentino",
+                    dni = 45838091,
+                    phone = "3472582334",
+                    age = 19
+                },
+
+                new UserClient
+                {
+                    id = 6,
+                    email = "marmax0504@gmail.com",
+                    password = HashGenerator.GenerateHash("marmax"),
+                    name = "Maximo",
+                    lastName = "Martin",
+                    nationality = "Argentino",
+                    dni = 44778419,
+                    phone = "3496502453",
+                    age = 21
+                },
+            };
+        }
+    }
 }

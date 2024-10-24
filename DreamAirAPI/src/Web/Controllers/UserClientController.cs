@@ -70,10 +70,16 @@ namespace Web.Controllers
 
         [HttpGet("[action]")]
         [Authorize]
-        public IActionResult GetTickets() 
+        public IActionResult GetTickets()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            return Ok(_userClientService.GetTickets(int.Parse(userId)));
+            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+            if (userRole == "cliente")
+            {
+                return Ok(_userClientService.GetTickets(int.Parse(userId)));
+            }
+            return Forbid();
         }
 
         [HttpPost("[action]")]
@@ -81,9 +87,6 @@ namespace Web.Controllers
         [Authorize]
         public IActionResult BuyTicket(TicketRequest ticket)
         {
-           
-
-
             int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "");
             var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
 

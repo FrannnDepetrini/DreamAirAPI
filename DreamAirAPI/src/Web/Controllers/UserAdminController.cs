@@ -28,39 +28,69 @@ namespace Web.Controllers
         [HttpGet("[action]")]
         public IActionResult Get()
         {
+
             var userRole = User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Role)?.Value;
             if (userRole == null) return NotFound();
 
             if (userRole == "admin") {
                 return Ok(_userService.Get());
             }
-
-            throw new Exception("Not allowed");
+            return Forbid();
         }
 
         [HttpPost("[action]")]
         public IActionResult CreateClient(UserClientRequest client)
         {
-            return Ok(_userClientService.Create(client));
+            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+            if (userRole == "admin")
+            {
+                return Ok(_userClientService.Create(client));
+
+            }
+            return Forbid();
         }
 
         [HttpPost("[action]")]
         public IActionResult CreateAirline(UserAirlineRequest airline)
         {
-            return Ok(_userAirlineService.Create(airline));
+
+            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+            if (userRole == "admin")
+            {
+                return Ok(_userAirlineService.Create(airline));
+
+            }
+            return Forbid();
         }
 
         [HttpPut("[action]")]
         public IActionResult UpdateRole(string newRole, int id) 
         {
-            return Ok(_userService.UpdateRole(newRole, id));
+            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+            if (userRole == "admin")
+            {
+                return Ok(_userService.UpdateRole(newRole, id));
+
+            }
+            return Forbid();
         }
 
         [HttpDelete("[action]")]
 
         public IActionResult Delete(int id) 
         {
-            return Ok(_userService.Delete(id));
+
+            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+            if (userRole == "admin")
+            {
+                return Ok(_userService.Delete(id));
+
+            }
+            return Forbid();
         }
     }
 }
