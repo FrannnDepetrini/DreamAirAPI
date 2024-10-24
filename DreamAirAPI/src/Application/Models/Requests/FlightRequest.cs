@@ -10,22 +10,29 @@ namespace Application.Models.Requests
     public class FlightRequest
     {
         [Required]
+        public string travel {  get; set; }
+        [Required]
         public string departure { get; set; }
         [Required]
         public string arrival { get; set; }
         [Required]
-        public DateTime date { get; set; }
+        public DateTime dateGo { get; set; }
         [Required]
-        public string timeDeparture { get; set; }
+        public string timeDepartureGo { get; set; }
         [Required]
-        public string timeArrival { get; set; }
+        public string timeArrivalGo { get; set; }
+        
+        public DateTime? dateBack { get; set; }
+        
+        public string? timeDepartureBack { get; set; }
+        
+        public string? timeArrivalBack { get; set; }
         [Required]
         public int totalAmountEconomic { get; set; }
         [Required]
         public int totalAmountFirstClass { get; set; }
         [Required]
         public float priceDefault { get; set; }
-        [Required]
-        public string airline { get; set; }
+        
     }
 }

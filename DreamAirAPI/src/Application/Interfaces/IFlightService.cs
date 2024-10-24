@@ -17,7 +17,7 @@ namespace Application.Interfaces
 
         int Delete(int id);
 
-        int Update(int id, FlightUpdateRequest flight);
+        int Update(FlightUpdateRequest flight);
         
             
     }

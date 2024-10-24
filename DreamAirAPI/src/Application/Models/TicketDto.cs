@@ -17,13 +17,19 @@ namespace Application.Models
 
         public string fullName { get; set; }
         public int dni { get; set; }
-        public string timeDeparture { get; set; }
+        public string timeDepartureGo { get; set; }
 
-        public string timeArrival { get; set; }
-        public DateTime date {  get; set; }
+        public string timeArrivalGo { get; set; }
+        public DateTime dateGo {  get; set; }
+
+        public string? timeDepartureBack { get; set; }
+
+        public string? timeArrivalBack { get; set; }
+        public DateTime? dateBack { get; set; }
 
 
-        public  static TicketDto Create(Ticket ticket) 
+
+        public static TicketDto Create(Ticket ticket) 
         {
             return new TicketDto
             {
@@ -34,9 +40,12 @@ namespace Application.Models
                 Price = ticket.Price,
                 fullName = $"{ticket.user.name} {ticket.user.lastName}",
                 dni = ticket.user.dni,
-                timeDeparture = ticket.flight.timeDeparture,
-                timeArrival = ticket.flight.timeArrival,
-                date = ticket.flight.date
+                timeDepartureGo = ticket.flight.timeDepartureGo,
+                timeArrivalGo = ticket.flight.timeArrivalGo,
+                dateGo = ticket.flight.dateGo,
+                timeDepartureBack = ticket.flight.timeDepartureBack ?? null,
+                timeArrivalBack = ticket.flight.timeArrivalBack ?? null,
+                dateBack = ticket.flight.dateBack ?? null
             };
 
         }

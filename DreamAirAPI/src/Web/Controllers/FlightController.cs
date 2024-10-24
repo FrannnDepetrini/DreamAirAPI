@@ -62,7 +62,7 @@ namespace Web.Controllers
         [HttpPut("[action]")]
         public IActionResult Update([FromBody] FlightUpdateRequest flight)
         {
-            return Ok(_flightService.Update(flight.flightId, flight));
+            return Ok(_flightService.Update(flight));
         }
     }
 }

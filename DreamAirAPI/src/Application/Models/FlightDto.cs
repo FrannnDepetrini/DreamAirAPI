@@ -10,11 +10,16 @@ namespace Application.Models
     public class FlightDto
     {
         public int id { get; set; }
+        public string travel {  get; set; }
         public string departure { get; set; }
         public string arrival { get; set; }
-        public DateTime date { get; set; }
-        public string timeDeparture { get; set; }
-        public string timeArrival { get; set; }
+        public DateTime dateGo { get; set; }
+        public string timeDepartureGo { get; set; }
+        public string timeArrivalGo { get; set; }
+
+        public DateTime? dateBack { get; set; }
+        public string? timeDepartureBack { get; set; }
+        public string? timeArrivalBack { get; set; }
         public string duration { get; set; }
         public int totalAmountEconomic { get; set; }
         public int totalAmountFirstClass { get; set; }
@@ -32,11 +37,15 @@ namespace Application.Models
             return new FlightDto
             {
                 id = flight.id,
+                travel = flight.travel,
                 departure = flight.departure,
                 arrival = flight.arrival,
-                date = flight.date,
-                timeDeparture = flight.timeDeparture,
-                timeArrival = flight.timeArrival,
+                dateGo = flight.dateGo,
+                timeDepartureGo = flight.timeDepartureGo,
+                timeArrivalGo = flight.timeArrivalGo,
+                dateBack = flight.dateBack ?? null,
+                timeDepartureBack = flight.timeDepartureBack ?? null,
+                timeArrivalBack = flight.timeArrivalBack ?? null,
                 duration = flight.duration,
                 totalAmountEconomic = flight.totalAmountEconomic,
                 totalAmountFirstClass = flight.totalAmountFirstClass,

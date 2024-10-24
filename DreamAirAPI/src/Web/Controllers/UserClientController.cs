@@ -73,8 +73,7 @@ namespace Web.Controllers
         [Authorize]
         public IActionResult BuyTicket(TicketRequest ticket)
         {
-            Flight? flightFound = _flightService.GetById(ticket.flightId);
-            if (flightFound == null) return NotFound();
+           
 
 
             int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "");
@@ -82,7 +81,7 @@ namespace Web.Controllers
 
             if (userRole == "cliente")
             {
-                return Ok(_ticketService.Create(ticket.classSeat, userId, flightFound));
+                return Ok(_ticketService.Create(ticket, userId));
             }
             return Forbid();
         }

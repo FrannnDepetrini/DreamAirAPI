@@ -46,11 +46,15 @@ namespace Application.Services
             {
                 Flight flight1 = new Flight
                 {
+                    travel = flight.travel,
                     departure = flight.departure,
                     arrival = flight.arrival,
-                    date = flight.date,
-                    timeDeparture = flight.timeDeparture,
-                    timeArrival = flight.timeArrival,
+                    dateGo = flight.dateGo,
+                    timeDepartureGo = flight.timeDepartureGo,
+                    timeArrivalGo = flight.timeArrivalGo,
+                    dateBack = flight.dateBack ?? null,
+                    timeDepartureBack = flight.timeDepartureBack ?? null,
+                    timeArrivalBack = flight.timeArrivalBack ?? null,
                     totalAmountEconomic = flight.totalAmountEconomic,
                     totalAmountFirstClass = flight.totalAmountFirstClass,
                     priceDefault = flight.priceDefault,
@@ -68,9 +72,12 @@ namespace Application.Services
         {
             Flight flight1 = new Flight 
             { 
-                date = flight.date, 
-                timeDeparture = flight.timeDeparture, 
-                timeArrival = flight.timeArrival 
+                dateGo = flight.dateGo, 
+                timeDepartureGo = flight.timeDepartureGo, 
+                timeArrivalGo = flight.timeArrivalGo,
+                dateBack = flight.dateBack ?? null,
+                timeDepartureBack = flight.timeDepartureBack ?? null,
+                timeArrivalBack = flight.timeArrivalBack
             };
             return _flightRepository.Update(flight.flightId, flight1);
         }

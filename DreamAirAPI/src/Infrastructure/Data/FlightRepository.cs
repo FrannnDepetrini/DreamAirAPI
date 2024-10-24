@@ -46,9 +46,12 @@ namespace Infrastructure.Data
             Flight flightFound = _context.Set<Flight>().Find(id);
             if (flightFound != null)
             {
-                flightFound.date = flight.date;
-                flightFound.timeArrival = flight.timeArrival;
-                flightFound.timeDeparture = flight.timeDeparture;
+                flightFound.dateGo = flight.dateGo;
+                flightFound.timeArrivalGo = flight.timeArrivalGo;
+                flightFound.timeDepartureGo = flight.timeDepartureGo;
+                flightFound.dateBack = flight.dateBack ?? null;
+                flightFound.timeArrivalBack = flight.timeArrivalBack ?? null;
+                flightFound.timeDepartureBack = flight.timeDepartureBack ?? null;
                 _context.Set<Flight>().Update(flightFound);
                 _context.SaveChanges();
             return 1;

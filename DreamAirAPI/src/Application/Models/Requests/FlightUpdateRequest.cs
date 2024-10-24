@@ -11,12 +11,16 @@ namespace Application.Models.Requests
     {
 
         public int flightId { get; set; }
-        public DateTime date { get; set; }
-        public string timeDeparture { get; set; }
-        public string timeArrival { get; set; }
-        
-     
-        }
+        public DateTime dateGo { get; set; }
+        public string timeDepartureGo { get; set; }
+        public string timeArrivalGo { get; set; }
+
+        public DateTime? dateBack { get; set; }
+        public string? timeDepartureBack { get; set; }
+        public string? timeArrivalBack { get; set; }
+
+
+    }
 }
 
 
