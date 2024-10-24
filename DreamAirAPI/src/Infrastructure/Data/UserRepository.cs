@@ -33,7 +33,22 @@ namespace Infrastructure.Data
             return _context.Set<User>().Find(id);
         }
 
+        public User UpdateRole(User user, string newRole) 
+        {
+            user.role = newRole;
+            _context.Set<User>().Update(user);
+            _context.SaveChanges();
 
+            return user;
+        }
+
+        public User Delete(User user) 
+        {
+            _context.Set<User>().Remove(user);
+            _context.SaveChanges();
+
+            return user;
+        }
 
     }
 }

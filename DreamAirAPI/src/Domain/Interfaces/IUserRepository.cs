@@ -11,10 +11,11 @@ namespace Domain.Interfaces
     {
         List<User> Get();
         User GetByEmail(string email);
-        
+
         User GetById(int id);
-        
 
+        User UpdateRole(User user, string newRole);
 
+        User Delete(User user);
     }
 }

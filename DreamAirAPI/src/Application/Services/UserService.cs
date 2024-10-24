@@ -27,5 +27,21 @@ namespace Application.Services
         {
            return _userRepository.GetById(id);
         }
+
+        public User UpdateRole(string newRole, int id) 
+        {
+            var userFound = _userRepository.GetById(id);
+            if (userFound == null) throw new Exception("Not found");
+
+            return _userRepository.UpdateRole(userFound, newRole);
+        }
+
+        public User Delete(int id)
+        {
+            var userFound = _userRepository.GetById(id);
+            if (userFound == null) throw new Exception("Not found");
+
+            return _userRepository.Delete(userFound);
+        }
     }
 }

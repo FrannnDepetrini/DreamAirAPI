@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Application.Models.Requests;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -13,12 +14,15 @@ namespace Web.Controllers
     public class UserAdminController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IUserClientService _userClientService;
+        private readonly IUserAirlineService _userAirlineService;
       
 
-        public UserAdminController(IUserService userService)
+        public UserAdminController(IUserService userService, IUserClientService userClientService, IUserAirlineService userAirlineService)
         {
             _userService = userService;
-       
+            _userClientService = userClientService;
+            _userAirlineService = userAirlineService;
         }
 
         [HttpGet("[action]")]
@@ -33,6 +37,30 @@ namespace Web.Controllers
 
             throw new Exception("Not allowed");
         }
-        
+
+        [HttpPost("[action]")]
+        public IActionResult CreateClient(UserClientRequest client)
+        {
+            return Ok(_userClientService.Create(client));
+        }
+
+        [HttpPost("[action]")]
+        public IActionResult CreateAirline(UserAirlineRequest airline)
+        {
+            return Ok(_userAirlineService.Create(airline));
+        }
+
+        [HttpPut("[action]")]
+        public IActionResult UpdateRole(string newRole, int id) 
+        {
+            return Ok(_userService.UpdateRole(newRole, id));
+        }
+
+        [HttpDelete("[action]")]
+
+        public IActionResult Delete(int id) 
+        {
+            return Ok(_userService.Delete(id));
+        }
     }
 }

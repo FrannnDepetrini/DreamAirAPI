@@ -11,5 +11,9 @@ namespace Application.Interfaces
     {
         List<User> Get();
         User GetById(int id);
+
+        User UpdateRole(string newRole, int id);
+
+        User Delete(int id);
     }
 }
