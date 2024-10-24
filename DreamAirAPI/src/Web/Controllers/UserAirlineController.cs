@@ -18,6 +18,9 @@ namespace Web.Controllers
             _userAirlineService = userAirlineService;
             _authenticationService = autenticationService;   
         }
+
+
+
         [HttpGet("[action]")]
         public IActionResult GetAirlines() 
         {
@@ -26,15 +29,7 @@ namespace Web.Controllers
         [HttpPost("[action]")]
         public IActionResult Create(UserAirlineRequest airline)
         {
-
-            UserAirline airline1 = new UserAirline
-            {
-                email = airline.email,
-                password = _authenticationService.GenerateHash(airline.password),
-                name = airline.name
-               
-            };
-            return Ok(_userAirlineService.Create(airline1));
+            return Ok(_userAirlineService.Create(airline));
         }
 
 

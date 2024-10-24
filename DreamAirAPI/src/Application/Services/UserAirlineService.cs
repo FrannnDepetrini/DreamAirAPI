@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Application.Models.Requests;
 using Domain.Entities;
 using Domain.Interfaces;
 using System;
@@ -11,11 +12,13 @@ namespace Application.Services
 {
     public class UserAirlineService : IUserAirlineService
     {
+        private readonly IAutenticationService _authenticationService;
         private readonly IUserAirlineRepository _userAirlineRepository;
 
-        public UserAirlineService(IUserAirlineRepository userAirlineRepository) 
+        public UserAirlineService(IUserAirlineRepository userAirlineRepository, IAutenticationService autenticationService) 
         {
             _userAirlineRepository = userAirlineRepository;
+            _authenticationService = autenticationService;
         }
 
         public List<string> GetAirlines()
@@ -23,9 +26,17 @@ namespace Application.Services
                 return _userAirlineRepository.GetAirlines();
         }
 
-        public int Create(UserAirline airline)
+        public int Create(UserAirlineRequest airline)
         {
-            return _userAirlineRepository.Create(airline);
+            UserAirline airline1 = new UserAirline
+            {
+                email = airline.email,
+                password = _authenticationService.GenerateHash(airline.password),
+                name = airline.name
+
+            };
+
+            return _userAirlineRepository.Create(airline1);
         }
     }
 }

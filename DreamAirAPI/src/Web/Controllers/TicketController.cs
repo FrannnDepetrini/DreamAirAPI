@@ -18,25 +18,5 @@ namespace Web.Controllers
             _ticketService = ticketService;
             _flightService = flightService;
         }
-        //[HttpPost]
-        //public IActionResult Create(TicketRequest ticket)
-        //{
-        //    Flight?flightFound = _flightService.GetById(ticket.flightId);
-
-        //    Ticket ticket1 = new Ticket
-        //    {
-        //        classSeat = ticket.classSeat,
-        //        State = ticket.State,
-                
-        //        flight= flightFound
-
-        //    };
-        //   ticket1.CalculatePrice();
-        //   ticket1.SeatSelected();
-
-        //    return Ok(_ticketService.Create(ticket1));
-
-        //}
-
     }
 }

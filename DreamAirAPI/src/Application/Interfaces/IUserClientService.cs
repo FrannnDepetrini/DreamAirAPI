@@ -1,4 +1,6 @@
-﻿using Domain.Entities;
+﻿using Application.Models;
+using Application.Models.Requests;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +11,13 @@ namespace Application.Interfaces
 {
     public interface IUserClientService
     {
-        int Create(UserClient client);
+        int Create(UserClientRequest client);
 
-        List<UserClient> Get();
+        List<UserClientDto> Get();
         
-        UserClient GetById(int id);
+        UserClientDto GetById(int id);
 
-        UserClient GetByEmail(string email);
+        UserClientDto GetByEmail(string email);
 
         int Delete(int id);
     }

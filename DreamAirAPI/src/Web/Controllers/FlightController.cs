@@ -22,16 +22,23 @@ namespace Web.Controllers
             _flightService = flightService;
             _userService = userService;
         }
+
+
         [HttpGet("[action]")]
         public IActionResult Get()
         {
-            var listMapped = _flightService.Get().Select((f) => FlightDto.Create(f)).ToList();
-            return Ok(listMapped);
+            return Ok(_flightService.Get());
         }
         [HttpGet("[action]")]
         public IActionResult GetById(int id)
         {
-            return Ok(FlightDto.Create(_flightService.GetById(id)));
+            var flight = _flightService.GetById(id);
+            if (flight == null) 
+            { 
+                return NotFound();
+            }
+            
+            return Ok(flight);
         }
        
         [HttpPost("[action]")]
@@ -40,27 +47,9 @@ namespace Web.Controllers
         public IActionResult Create(FlightRequest flight)
         {
             int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "");
-            var clientFound = _userService.GetById(userId);
-            if(clientFound is UserAirline userAirline)
-            {
-                Flight flight1 = new Flight
-                {
-                    departure = flight.departure,
-                    arrival = flight.arrival,
-                    date = flight.date,
-                    timeDeparture = flight.timeDeparture,
-                    timeArrival = flight.timeArrival,
-                    totalAmountEconomic = flight.totalAmountEconomic,
-                    totalAmountFirstClass = flight.totalAmountFirstClass,
-                    priceDefault = flight.priceDefault,
-                    UserAirline = userAirline,
-                    airline = userAirline.name,
-
-                };
-                flight1.CalculateDuration();
-                return Ok(_flightService.Create(flight1));
-            }
-            return Forbid();
+            if (userId == null) throw new Exception("ID Not found");
+            
+            return Ok(_flightService.Create(flight, userId));
 
         }
 
@@ -73,8 +62,7 @@ namespace Web.Controllers
         [HttpPut("[action]")]
         public IActionResult Update([FromBody] FlightUpdateRequest flight)
         {
-            Flight flight1 = new Flight { date = flight.date, timeDeparture = flight.timeDeparture, timeArrival = flight.timeArrival };
-            return Ok(_flightService.Update(flight.flightId, flight1));
+            return Ok(_flightService.Update(flight.flightId, flight));
         }
     }
 }

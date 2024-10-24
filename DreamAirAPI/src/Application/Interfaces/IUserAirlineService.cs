@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Models.Requests;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,6 @@ namespace Application.Interfaces
     {
          List<string> GetAirlines();
 
-        int Create(UserAirline userAirline);
+        int Create(UserAirlineRequest userAirline);
     }
 }

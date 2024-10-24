@@ -32,40 +32,40 @@ namespace Web.Controllers
         [HttpGet("[action]")]
         public IActionResult Get()
         {
-            var listMapped = _userClientService.Get().Select((uc) => UserClientDto.Create(uc)).ToList();
-            return Ok(listMapped);
+            
+            return Ok(_userClientService.Get());
         }
 
 
         [HttpGet("[action]")]
         public IActionResult GetById(int id)
         {
-            return Ok(UserClientDto.Create(_userClientService.GetById(id)));
+            var user = _userClientService.GetById(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
         }
 
         [HttpGet("[action]")]
         public IActionResult GetByEmail(string email)
         {
-            return Ok(UserClientDto.Create(_userClientService.GetByEmail(email)));
+            var user = _userClientService.GetByEmail(email);
+            if (user == null) 
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
         }
 
 
         [HttpPost("[action]")]
         public IActionResult Create(UserClientRequest client)
         {
-
-            UserClient client1 = new UserClient
-            {
-                email = client.email,
-                password = _authenticationService.GenerateHash(client.password),
-                name = client.name,
-                lastName = client.lastName,
-                nationality = client.nationality,
-                dni = client.dni,
-                phone = client.phone,
-                age = client.age
-            };
-            return Ok(_userClientService.Create(client1));
+            return Ok(_userClientService.Create(client));
         }
 
         [HttpPost("[action]")]
@@ -74,17 +74,15 @@ namespace Web.Controllers
         public IActionResult BuyTicket(TicketRequest ticket)
         {
             Flight? flightFound = _flightService.GetById(ticket.flightId);
-            if (flightFound == null) return StatusCode(404, "Vuelo no encontrado");
+            if (flightFound == null) return NotFound();
 
 
             int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "");
-            UserClient? clientFound = _userClientService.GetById(userId);
-            if (clientFound == null) return StatusCode(404, "Cliente no encontrado");
             var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
 
             if (userRole == "cliente")
             {
-                return Ok(_ticketService.Create(ticket.classSeat, clientFound, flightFound));
+                return Ok(_ticketService.Create(ticket.classSeat, userId, flightFound));
             }
             return Forbid();
         }

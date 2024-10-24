@@ -13,17 +13,21 @@ namespace Application.Services
     {
 
         private readonly ITicketRepository _ticketRepository;
-        public TicketService(ITicketRepository ticketRepository)
+        private readonly IUserClientRepository _userClientRepository;
+        public TicketService(ITicketRepository ticketRepository, IUserClientRepository userClientRepository)
         {
             _ticketRepository = ticketRepository;
+            _userClientRepository = userClientRepository;
         }
 
-        public int Create(string classSeat, UserClient client, Flight flight)
+        public int Create(string classSeat, int id, Flight flight)
         {
+            var clientFound = _userClientRepository.GetById(id);
+            if (clientFound == null) throw new Exception("User not found");
             Ticket ticket1 = new Ticket
             {
                 classSeat = classSeat,
-                user = client,
+                user = clientFound,
                 flight = flight
             };
 
