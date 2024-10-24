@@ -26,14 +26,10 @@ namespace Application.Models
         public float priceDefault { get; set; }
         public int freeEconomicSeats { get; set; }
         public int freeFirstClassSeats { get; set; }
-        public List<TicketDto> tickets { get; set; } = new List<TicketDto>();
-
+        
         public static FlightDto Create(Flight flight)
         {
-            var listMapped = flight.tickets.Select(tck =>
-            {
-                return TicketDto.Create(tck);
-            });
+            
             return new FlightDto
             {
                 id = flight.id,
@@ -51,8 +47,7 @@ namespace Application.Models
                 totalAmountFirstClass = flight.totalAmountFirstClass,
                 priceDefault = flight.priceDefault,
                 freeEconomicSeats = flight.freeEconomicSeats,
-                freeFirstClassSeats = flight.freeFirstClassSeats,
-                tickets = listMapped.ToList()
+                freeFirstClassSeats = flight.freeFirstClassSeats
             };
         }
     }

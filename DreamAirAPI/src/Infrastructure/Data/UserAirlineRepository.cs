@@ -1,5 +1,7 @@
-﻿using Domain.Entities;
+﻿using Application.Models;
+using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +29,10 @@ namespace Infrastructure.Data
             _context.SaveChanges();
             return 1;
         }
+
+        public List<Flight> GetFlights(int id) 
+        {
+            return _context.Set<UserAirline>().Include(ua => ua.flights).Where(ua => ua.id == id).SelectMany(ua => ua.flights).ToList();
+        }
     }
-
-
 }

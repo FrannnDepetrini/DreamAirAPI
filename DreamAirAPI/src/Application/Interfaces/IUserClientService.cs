@@ -20,5 +20,7 @@ namespace Application.Interfaces
         UserClientDto GetByEmail(string email);
 
         int Delete(int id);
+
+        List<TicketDto> GetTickets(int id);
     }
 }

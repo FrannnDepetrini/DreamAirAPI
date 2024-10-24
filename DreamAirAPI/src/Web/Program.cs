@@ -23,7 +23,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-var connection = new SqliteConnection("data source = DB-Flights.db");
+//var connection = new SqliteConnection("data source = DB-Flights.db");
+string connectionString = builder.Configuration["ConnectionStrings:DreamAirDBConnectionString"];
+var connection = new SqliteConnection(connectionString);
 connection.Open();
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite(connection, b => b.MigrationsAssembly("Infrastructure")));
 builder.Services.AddScoped<IFlightRepository , FlightRepository>();

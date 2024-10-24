@@ -16,5 +16,7 @@ namespace Domain.Interfaces
         UserClient GetByEmail(string email);
 
         int Delete(int id);
+
+        List<Ticket> GetTickets(int id);
     }
 }

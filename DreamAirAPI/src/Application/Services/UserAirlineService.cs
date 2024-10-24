@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Application.Models;
 using Application.Models.Requests;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -38,6 +39,12 @@ namespace Application.Services
             };
 
             return _userAirlineRepository.Create(airline1);
+        }
+
+        public List<FlightDto> GetFlights(int id) 
+        {
+            var listMapped = _userAirlineRepository.GetFlights(id).Select(f => FlightDto.Create(f)).ToList();
+            return listMapped;
         }
     }
 }

@@ -68,6 +68,14 @@ namespace Web.Controllers
             return Ok(_userClientService.Create(client));
         }
 
+        [HttpGet("[action]")]
+        [Authorize]
+        public IActionResult GetTickets() 
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            return Ok(_userClientService.GetTickets(int.Parse(userId)));
+        }
+
         [HttpPost("[action]")]
 
         [Authorize]

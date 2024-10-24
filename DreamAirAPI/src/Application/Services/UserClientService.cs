@@ -63,5 +63,11 @@ namespace Application.Services
         {
             return _userClientRepository.Delete(id);
         }
+
+        public List<TicketDto> GetTickets(int id)
+        {
+            var listMapped = _userClientRepository.GetTickets(id).Select(t => TicketDto.Create(t)).ToList();
+            return listMapped;
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace Domain.Entities
     {
         public string name { get; set; }
 
-        List<Flight> flights { get; set; } = new List<Flight>();
+        public List<Flight> flights { get; set; } = new List<Flight>();
     }
 
     

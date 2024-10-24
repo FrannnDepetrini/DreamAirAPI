@@ -55,6 +55,11 @@ namespace Infrastructure.Data
             {
                 return 0;
             }
-        } 
+        }
+
+        public List<Ticket> GetTickets(int id)
+        {
+            return _context.Set<UserClient>().Include(uc => uc.tickets).Where(uc => uc.id == id).SelectMany(uc => uc.tickets).ToList();
+        }
     }
 }

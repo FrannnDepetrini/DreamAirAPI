@@ -1,4 +1,5 @@
-﻿using Application.Models.Requests;
+﻿using Application.Models;
+using Application.Models.Requests;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,7 @@ namespace Application.Interfaces
          List<string> GetAirlines();
 
         int Create(UserAirlineRequest userAirline);
+
+        List<FlightDto> GetFlights(int id);
     }
 }
