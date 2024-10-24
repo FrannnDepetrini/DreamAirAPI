@@ -18,6 +18,11 @@ namespace Application.Services
             _userRepository = userRepository;
         }
 
+        public List<User> Get()
+        {
+            return _userRepository.Get();
+        }
+
         public User GetById(int id)
         {
            return _userRepository.GetById(id);

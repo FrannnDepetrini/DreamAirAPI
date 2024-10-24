@@ -32,7 +32,8 @@ namespace Application.Services
             {
                 email = airline.email,
                 password = _authenticationService.GenerateHash(airline.password),
-                name = airline.name
+                name = airline.name,
+                role= "airline"
 
             };
 

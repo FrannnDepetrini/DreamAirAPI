@@ -11,7 +11,7 @@ namespace Domain.Interfaces
     {
         List<User> Get();
         User GetByEmail(string email);
-
+        
         User GetById(int id);
         
 

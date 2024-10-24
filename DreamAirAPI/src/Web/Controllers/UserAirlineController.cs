@@ -2,6 +2,7 @@
 using Application.Models.Requests;
 using Application.Services;
 using Domain.Entities;
+using Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,10 +14,12 @@ namespace Web.Controllers
     {
         private readonly IUserAirlineService _userAirlineService;
         private readonly IAutenticationService _authenticationService;
-        public UserAirlineController(IUserAirlineService userAirlineService, IAutenticationService autenticationService)
+        private readonly IUserRepository _userService;
+        public UserAirlineController(IUserAirlineService userAirlineService, IAutenticationService autenticationService, IUserRepository userRepository)
         {
             _userAirlineService = userAirlineService;
-            _authenticationService = autenticationService;   
+            _authenticationService = autenticationService;  
+            _userService = userRepository;
         }
 
 
@@ -30,6 +33,14 @@ namespace Web.Controllers
         public IActionResult Create(UserAirlineRequest airline)
         {
             return Ok(_userAirlineService.Create(airline));
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult GetByEmail(int id)
+        {
+
+            return Ok(_userService.GetById(id));
+
         }
 
 

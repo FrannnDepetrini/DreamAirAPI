@@ -9,6 +9,7 @@ namespace Application.Interfaces
 {
     public interface IUserService
     {
+        List<User> Get();
         User GetById(int id);
     }
 }

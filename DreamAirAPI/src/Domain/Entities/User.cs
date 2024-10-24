@@ -13,5 +13,7 @@ namespace Domain.Entities
         public string password { get; set; }
 
         public string role { get; set; } = "cliente";
+
+       
     }
 }
