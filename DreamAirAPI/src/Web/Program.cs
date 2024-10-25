@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 using static Infrastructure.Services.AutenticationService;
 
@@ -62,6 +63,33 @@ builder.Services.AddAuthentication("Bearer") //"Bearer" es el tipo de auntentica
         };
     }
 );
+
+
+//Swagger configuracion para usar token
+
+builder.Services.AddSwaggerGen(setupAction =>
+{
+setupAction.AddSecurityDefinition("DreamAirApiBearerAuth", new OpenApiSecurityScheme() //Esto va a permitir usar swagger con el token.
+{
+    Type = SecuritySchemeType.Http,
+    Scheme = "Bearer",
+    Description = "Acá pegar el token generado al loguearse."
+});
+
+setupAction.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "DreamAirApiBearerAuth" } //Tiene que coincidir con el id seteado arriba en la definición
+                }, new List<string>() }
+    });
+
+});
+
 
 builder.Services.AddCors(options =>
 {

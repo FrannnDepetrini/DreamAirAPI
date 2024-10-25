@@ -74,19 +74,9 @@ namespace Infrastructure.Services
             return new JwtSecurityTokenHandler().WriteToken(jwtConfig);
         }
 
-        public  string GenerateHash(string password)
+        public string GenerateHash(string password)
         {
-            //using (SHA256 sha256 = SHA256.Create())
-            //{
-            //    byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-
-            //    StringBuilder builder = new StringBuilder();
-            //    for (int i = 0; i < bytes.Length; i++)
-            //    {
-            //        builder.Append(bytes[i].ToString("x2"));
-            //    }
-            //    return builder.ToString();
-            //}
+            
             return HashGenerator.GenerateHash(password);
         }
         public class AutenticationServiceOptions

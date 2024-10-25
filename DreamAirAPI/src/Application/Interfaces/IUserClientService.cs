@@ -22,5 +22,7 @@ namespace Application.Interfaces
         int Delete(int id);
 
         List<TicketDto> GetTickets(int id);
+
+
     }
 }

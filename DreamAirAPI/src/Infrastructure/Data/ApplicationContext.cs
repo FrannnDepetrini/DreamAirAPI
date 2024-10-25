@@ -31,7 +31,7 @@ namespace Infrastructure.Data
             modelBuilder.Entity<UserAdmin>().HasData(CreateUserAdminDataSeed());
             modelBuilder.Entity<UserAirline>().HasData(CreateUserAirlineDataSeed());
             modelBuilder.Entity<UserClient>().HasData(CreateUserClientDataSeed());
-
+            modelBuilder.Entity<Flight>().HasData(CreateFlightDataSeed());
         }
 
         
@@ -120,5 +120,56 @@ namespace Infrastructure.Data
                 },
             };
         }
+        
+        
+        ///Vuelos creados
+        private Object[] CreateFlightDataSeed()
+        {
+
+            return new Object[]
+            {
+                new
+                {
+                    id = 1,
+                    travel = "Ida",
+                    departure= "Rosario (Ros)",
+                    arrival="Buenos Aires (Bsas)",
+                    dateGo= new DateTime(2024,10, 25),
+                    timeDepartureGo = "12:00",
+                    timeArrivalGo = "15:00",
+                    duration = "3hs",
+                    totalAmountEconomic = 100,
+                    freeEconomicSeats = 0,
+                    totalAmountFirstClass = 25,
+                    freeFirstClassSeats = 0,
+                    priceDefault = 85000f,
+                    UserAirlineid = 2,
+                    airline = "Emirates"
+
+                } , new
+                {
+                    id = 2,
+                    travel = "IDAyVUELTA",
+                    departure= "Rosario (Ros)",
+                    arrival="Buenos Aires (Bsas)",
+                    dateGo= new DateTime(2024,10,25),
+                    timeDepartureGo = "12:00",
+                    timeArrivalGo = "15:00",
+                    dateBack= new DateTime(2024,11,25),
+                    timeDepartureBack = "22:00",
+                    timeArrivalBack = "01:00",
+                    duration = "3hs",
+                    totalAmountEconomic = 100,
+                    freeEconomicSeats = 0,
+                    totalAmountFirstClass = 25,
+                    freeFirstClassSeats = 0,
+                    priceDefault = 85000f,
+                    UserAirlineid = 3,
+                    airline = "Flybondi",
+
+                }
+            };
+        }
+
     }
 }

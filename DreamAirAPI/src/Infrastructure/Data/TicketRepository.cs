@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,18 @@ namespace Infrastructure.Data
             _context.Set<Ticket>().Add(ticket);
             _context.SaveChanges();
             return 1;
+        }
+
+        public int Delete(Ticket ticket)
+        {
+            _context.Set<Ticket>().Remove(ticket);
+            _context.SaveChanges();
+            return 1;
+        }
+
+        public Ticket GetById(int id)
+        {
+            return _context.Set<Ticket>().Find(id);
         }
     }
 }

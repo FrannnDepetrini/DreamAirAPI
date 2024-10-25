@@ -13,5 +13,7 @@ namespace Application.Interfaces
     {
         int Create(TicketRequest ticket, int id);
 
+        int Delete(int ticketId, int userId);
+
     }
 }

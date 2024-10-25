@@ -30,14 +30,7 @@ namespace Web.Controllers
         [HttpGet("[action]")]
         public IActionResult GetAirlines() 
         {
-            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-
-            if (userRole == "airline")
-            {
-                return Ok(_userAirlineService.GetAirlines());
-
-            }
-            return Forbid();
+            return Ok(_userAirlineService.GetAirlines());
         }
 
         [HttpPost("[action]")]

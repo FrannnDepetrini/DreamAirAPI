@@ -59,7 +59,14 @@ namespace Infrastructure.Data
 
         public List<Ticket> GetTickets(int id)
         {
-            return _context.Set<UserClient>().Include(uc => uc.tickets).Where(uc => uc.id == id).SelectMany(uc => uc.tickets).ToList();
+            return _context.Set<UserClient>()
+        .Include(uc => uc.tickets)
+            .ThenInclude(ticket => ticket.flight)
+        .Include(uc => uc.tickets)
+            .ThenInclude(ticket => ticket.user) // Incluir el usuario relacionado
+        .Where(uc => uc.id == id)
+        .SelectMany(uc => uc.tickets)
+        .ToList();
         }
     }
 }

@@ -18,5 +18,6 @@ namespace Domain.Interfaces
         int Delete(int id);
 
         List<Ticket> GetTickets(int id);
+
     }
 }
