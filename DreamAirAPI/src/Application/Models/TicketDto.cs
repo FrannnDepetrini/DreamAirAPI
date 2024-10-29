@@ -27,6 +27,8 @@ namespace Application.Models
         public string? TimeArrivalBack { get; set; }
         public DateTime? DateBack { get; set; }
 
+        public string Airline { get; set; }
+
 
 
         public static TicketDto Create(Ticket ticket) 
@@ -45,7 +47,8 @@ namespace Application.Models
                 DateGo = ticket.Flight.DateGo,
                 TimeDepartureBack = ticket.Flight.TimeDepartureBack ?? null,
                 TimeArrivalBack = ticket.Flight.TimeArrivalBack ?? null,
-                DateBack = ticket.Flight.DateBack ?? null
+                DateBack = ticket.Flight.DateBack ?? null,
+                Airline = ticket.Flight.Airline
             };
 
         }

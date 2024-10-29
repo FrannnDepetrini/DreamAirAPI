@@ -57,13 +57,9 @@ namespace Web.Controllers
         public IActionResult GetTickets()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-
-            if (userRole == "cliente")
-            {
-                return Ok(_userClientService.GetTickets(int.Parse(userId)));
-            }
-            return Forbid();
+            
+            return Ok(_userClientService.GetTickets(int.Parse(userId)));
+            
         }
 
         

@@ -45,7 +45,7 @@ namespace Application.Services
 
             
 
-            if (userRole == "admin" || flightFound.UserAirlineId == userId)
+            if (userRole == "admin" || flightFound.UserAirline.Id == userId)
             {
                 return _flightRepository.Delete(flightFound);
 

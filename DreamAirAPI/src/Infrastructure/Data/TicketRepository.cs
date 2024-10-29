@@ -31,7 +31,7 @@ namespace Infrastructure.Data
 
         public Ticket GetById(int id)
         {
-            return _context.Set<Ticket>().Find(id);
+            return _context.Set<Ticket>().Include(t => t.User).FirstOrDefault(t => t.Id == id);
         }
     }
 }

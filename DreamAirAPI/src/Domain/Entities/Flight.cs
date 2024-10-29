@@ -35,7 +35,7 @@ namespace Domain.Entities
         public UserAirline UserAirline { get; set; }
         public int FreeEconomicSeats { get; set; } = 0;
         public int FreeFirstClassSeats { get; set; } = 0;
-        public int UserAirlineId { get; set; }
+        
 
 
         public string CalculateSeat(string classSeat)

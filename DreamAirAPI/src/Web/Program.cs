@@ -18,13 +18,12 @@ using static Infrastructure.Services.AutenticationService;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//var connection = new SqliteConnection("data source = DB-Flights.db");
+;
 string connectionString = builder.Configuration["ConnectionStrings:DreamAirDBConnectionString"];
 var connection = new SqliteConnection(connectionString);
 connection.Open();
@@ -49,8 +48,8 @@ builder.Services.Configure<AutenticationServiceOptions>(
      builder.Configuration.GetSection(AutenticationServiceOptions.AutenticacionService)
     );
 
-builder.Services.AddAuthentication("Bearer") //"Bearer" es el tipo de auntenticación que tenemos que elegir después en PostMan para pasarle el token
-    .AddJwtBearer(options => //Acá definimos la configuración de la autenticación. le decimos qué cosas queremos comprobar. La fecha de expiración se valida por defecto.
+builder.Services.AddAuthentication("Bearer") 
+    .AddJwtBearer(options => 
     {
         options.TokenValidationParameters = new()
         {
@@ -65,11 +64,11 @@ builder.Services.AddAuthentication("Bearer") //"Bearer" es el tipo de auntentica
 );
 
 
-//Swagger configuracion para usar token
+
 
 builder.Services.AddSwaggerGen(setupAction =>
 {
-setupAction.AddSecurityDefinition("DreamAirApiBearerAuth", new OpenApiSecurityScheme() //Esto va a permitir usar swagger con el token.
+setupAction.AddSecurityDefinition("DreamAirApiBearerAuth", new OpenApiSecurityScheme()
 {
     Type = SecuritySchemeType.Http,
     Scheme = "Bearer",
@@ -84,7 +83,7 @@ setupAction.AddSecurityRequirement(new OpenApiSecurityRequirement
                 Reference = new OpenApiReference
                 {
                     Type = ReferenceType.SecurityScheme,
-                    Id = "DreamAirApiBearerAuth" } //Tiene que coincidir con el id seteado arriba en la definición
+                    Id = "DreamAirApiBearerAuth" } 
                 }, new List<string>() }
     });
 
@@ -99,15 +98,6 @@ builder.Services.AddAuthorization(options =>
         policy.RequireAssertion(context =>
             context.User.IsInRole("admin") ||
             context.User.IsInRole("airline")));
-    //options.AddPolicy("AdminOrClient", policy =>
-    //    policy.RequireAssertion(context =>
-    //        context.User.IsInRole("admin") ||
-    //        context.User.IsInRole("client")));
-    //options.AddPolicy("EveryoneExceptGuests", policy =>
-    //    policy.RequireAssertion(context =>
-    //        context.User.IsInRole(UserType.Customer.ToString()) ||
-    //        context.User.IsInRole(UserType.Seller.ToString()) ||
-    //        context.User.IsInRole(UserType.Admin.ToString())));
 });
 
 

@@ -30,7 +30,7 @@ namespace Infrastructure.Data
         }
         public Flight GetById(int id)
         {
-            return _context.Set<Flight>().Include(f => f.Tickets).ThenInclude(t => t.User).FirstOrDefault(f => f.Id == id);
+            return _context.Set<Flight>().Include(f => f.UserAirline).Include(f => f.Tickets).ThenInclude(t => t.User).FirstOrDefault(f => f.Id == id);
         }
 
         public int Delete(Flight flightFound)

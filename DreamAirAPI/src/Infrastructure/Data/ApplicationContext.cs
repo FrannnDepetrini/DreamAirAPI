@@ -123,12 +123,12 @@ namespace Infrastructure.Data
 
 
         ///Vuelos creados
-        private Flight[] CreateFlightDataSeed()
+        private Object[] CreateFlightDataSeed()
         {
 
-            return new Flight[]
+            return new object[]
             {
-                new Flight
+                new 
                 {
                     Id = 1,
                     Travel = "Ida",
@@ -146,7 +146,7 @@ namespace Infrastructure.Data
                     UserAirlineId = 2,
                     Airline = "Emirates"
 
-                } , new Flight
+                } , new 
                 {
                     Id = 2,
                     Travel = "IDAyVUELTA",
