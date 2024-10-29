@@ -15,11 +15,13 @@ namespace Application.Services
     {
         private readonly IAutenticationService _authenticationService;
         private readonly IUserAirlineRepository _userAirlineRepository;
+        private readonly IUserRepository _userRepository;
 
-        public UserAirlineService(IUserAirlineRepository userAirlineRepository, IAutenticationService autenticationService) 
+        public UserAirlineService(IUserAirlineRepository userAirlineRepository, IAutenticationService autenticationService, IUserRepository userRepository) 
         {
             _userAirlineRepository = userAirlineRepository;
             _authenticationService = autenticationService;
+            _userRepository = userRepository;
         }
 
         public List<string> GetAirlines()
@@ -29,6 +31,8 @@ namespace Application.Services
 
         public int Create(UserAirlineRequest airline)
         {
+            var emailFound = _userRepository.GetByEmail(airline.Email);
+            if (emailFound != null) throw new Exception("This email already exists");
             UserAirline airline1 = new UserAirline
             {
                 Email = airline.Email,
