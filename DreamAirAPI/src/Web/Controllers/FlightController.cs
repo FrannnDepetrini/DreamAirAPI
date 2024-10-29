@@ -54,9 +54,11 @@ namespace Web.Controllers
         }
 
         [HttpDelete("[action]")]
-        public IActionResult Delete([FromBody]int id)
+        [Authorize]
+        public IActionResult Delete([FromBody] int id)
         {
-            return Ok(_flightService.Delete(id));
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            return Ok(_flightService.Delete(id, int.Parse(userId)));
         }
 
         [HttpPut("[action]")]

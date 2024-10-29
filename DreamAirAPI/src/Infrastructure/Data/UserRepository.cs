@@ -25,7 +25,7 @@ namespace Infrastructure.Data
 
         public User GetByEmail(string email) 
         {
-            return _context.Set<User>().FirstOrDefault(u => u.email == email);
+            return _context.Set<User>().FirstOrDefault(u => u.Email == email);
         }
 
         public User GetById(int id)
@@ -35,7 +35,7 @@ namespace Infrastructure.Data
 
         public User UpdateRole(User user, string newRole) 
         {
-            user.role = newRole;
+            user.Role = newRole;
             _context.Set<User>().Update(user);
             _context.SaveChanges();
 
@@ -50,5 +50,13 @@ namespace Infrastructure.Data
             return user;
         }
 
+        public bool ValidateEmail(string email) 
+        {
+            var emailFound = _context.Set<User>().FirstOrDefault(u => u.Email == email);
+
+            if (emailFound == null) return true;
+
+            return false;
+        }
     }
 }

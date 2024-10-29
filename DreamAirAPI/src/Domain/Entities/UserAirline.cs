@@ -8,9 +8,9 @@ namespace Domain.Entities
 {
     public class UserAirline : User
     {
-        public string name { get; set; }
+        public string Name { get; set; }
 
-        public List<Flight> flights { get; set; } = new List<Flight>();
+        public List<Flight> Flights { get; set; } = new List<Flight>();
     }
 
     

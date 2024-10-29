@@ -49,18 +49,6 @@ namespace Web.Controllers
             return Ok(user);
         }
 
-        [HttpGet("[action]")]
-        public IActionResult GetByEmail(string email)
-        {
-            var user = _userClientService.GetByEmail(email);
-            if (user == null) 
-            {
-                return NotFound();
-            }
-
-            return Ok(user);
-        }
-
 
         [HttpPost("[action]")]
         public IActionResult Create(UserClientRequest client)
@@ -81,22 +69,6 @@ namespace Web.Controllers
             }
             return Forbid();
         }
-
-
-        //[HttpPost("[action]")]
-
-        //[Authorize]
-        //public IActionResult BuyTicket(TicketRequest ticket)
-        //{
-        //    int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "");
-        //    var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-
-        //    if (userRole == "cliente")
-        //    {
-        //        return Ok(_ticketService.Create(ticket, userId));
-        //    }
-        //    return Forbid();
-        //}
 
         [HttpDelete("[action]")]
         public IActionResult Delete(int id)

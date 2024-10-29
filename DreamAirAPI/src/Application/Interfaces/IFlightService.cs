@@ -11,14 +11,14 @@ namespace Application.Interfaces
 {
     public interface IFlightService
     {
-        int Create(FlightRequest flight, int id);
+        int Create(FlightRequest flight, int userId);
         List<FlightDto> Get();
         FlightDto GetById(int id);
 
-        int Delete(int id);
+        int Delete(int flightId, int userId);
 
         int Update(FlightUpdateRequest flight);
-        
-            
+
+
     }
 }

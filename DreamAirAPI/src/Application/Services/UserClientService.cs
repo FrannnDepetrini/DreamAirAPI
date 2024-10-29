@@ -1,5 +1,4 @@
-﻿
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Application.Models;
 using Application.Models.Requests;
 using Domain.Entities;
@@ -12,56 +11,58 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public class UserClientService: IUserClientService
+    public class UserClientService : IUserClientService
     {
         private readonly IAutenticationService _authenticationService;
         private readonly IUserClientRepository _userClientRepository;
-        
-        public UserClientService(IUserClientRepository userClientRepository, IAutenticationService autenticationService)
+        private readonly IUserRepository _userRepository;
+
+        public UserClientService(IUserClientRepository userClientRepository, IAutenticationService autenticationService, IUserRepository userRepository)
         {
-             _userClientRepository = userClientRepository;
-             _authenticationService = autenticationService;
+            _userClientRepository = userClientRepository;
+            _authenticationService = autenticationService;
+            _userRepository = userRepository;
         }
 
         public int Create(UserClientRequest client)
         {
+            var emailFound = _userRepository.GetByEmail(client.Email);
+            if (emailFound != null) throw new Exception("This email already exists");
+
 
             UserClient client1 = new UserClient
             {
-                email = client.email,
-                password = _authenticationService.GenerateHash(client.password),
-                name = client.name,
-                lastName = client.lastName,
-                nationality = client.nationality,
-                dni = client.dni,
-                phone = client.phone,
-                age = client.age
+                Email = client.Email,
+                Password = _authenticationService.GenerateHash(client.Password),
+                Name = client.Name,
+                LastName = client.LastName,
+                Nationality = client.Nationality,
+                Dni = client.Dni,
+                Phone = client.Phone,
+                Age = client.Age
             };
 
-            return  _userClientRepository.Create(client1);
+            return _userClientRepository.Create(client1);
         }
 
-        public List<UserClientDto> Get() {
+        public List<UserClientDto> Get()
+        {
 
             var listMapped = _userClientRepository.Get().Select((uc) => UserClientDto.Create(uc)).ToList();
             return listMapped;
         }
-       
-        public UserClientDto GetById(int id) 
+
+        public UserClientDto GetById(int id)
         {
 
             return UserClientDto.Create(_userClientRepository.GetById(id));
         }
 
-        public UserClientDto GetByEmail(string email)
-        {
-
-            return UserClientDto.Create(_userClientRepository.GetByEmail(email));
-        }
-
         public int Delete(int id)
         {
-            return _userClientRepository.Delete(id);
+            var userFound = _userClientRepository.GetById(id);
+            if (userFound == null) throw new Exception("User not found");
+            return _userClientRepository.Delete(userFound);
         }
 
         public List<TicketDto> GetTickets(int id)

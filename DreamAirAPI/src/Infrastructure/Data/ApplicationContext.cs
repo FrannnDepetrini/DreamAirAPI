@@ -42,10 +42,10 @@ namespace Infrastructure.Data
             {
                 new UserAdmin
                 {
-                    id = 1,
-                    email = "admin@gmail.com",
-                    password = HashGenerator.GenerateHash("admin"),
-                    role = "admin"
+                    Id = 1,
+                    Email = "admin@gmail.com",
+                    Password = HashGenerator.GenerateHash("admin"),
+                    Role = "admin"
                 }
             };
         }
@@ -57,20 +57,20 @@ namespace Infrastructure.Data
             {
                 new UserAirline
                 {
-                    id = 2,
-                    name = "Emirates",
-                    email = "Emirates@gmail.com",
-                    password = HashGenerator.GenerateHash("emirates"),
-                    role = "airline"
+                    Id = 2,
+                    Name = "Emirates",
+                    Email = "Emirates@gmail.com",
+                    Password = HashGenerator.GenerateHash("emirates"),
+                    Role = "airline"
                 },
 
                 new UserAirline
                 {
-                    id = 3,
-                    name = "Flybondi",
-                    email = "Flybondi@gmail.com",
-                    password = HashGenerator.GenerateHash("Flybondi"),
-                    role = "airline"
+                    Id = 3,
+                    Name = "Flybondi",
+                    Email = "Flybondi@gmail.com",
+                    Password = HashGenerator.GenerateHash("Flybondi"),
+                    Role = "airline"
                 }
             };
         }
@@ -83,93 +83,94 @@ namespace Infrastructure.Data
             {
                 new UserClient
                 {
-                    id = 4,
-                    email = "joako.tanlon@gmail.com",
-                    password = HashGenerator.GenerateHash("joako"),
-                    name = "Joaquin",
-                    lastName = "Tanlongo",
-                    nationality = "Argentino",
-                    dni = 44290276,
-                    phone = "3412122907",
-                    age = 22
+                    Id = 4,
+                    Email = "joako.tanlon@gmail.com",
+                    Password = HashGenerator.GenerateHash("joako"),
+                    Name = "Joaquin",
+                    LastName = "Tanlongo",
+                    Nationality = "Argentino",
+                    Dni = 44290276,
+                    Phone = "3412122907",
+                    Age = 22
                 },
                 new UserClient
                 {
-                    id = 5,
-                    email = "frandepe7@gmail.com",
-                    password = HashGenerator.GenerateHash("frandepe"),
-                    name = "Francisco",
-                    lastName = "Depetrini",
-                    nationality = "Argentino",
-                    dni = 45838091,
-                    phone = "3472582334",
-                    age = 19
+                    Id = 5,
+                    Email = "frandepe7@gmail.com",
+                    Password = HashGenerator.GenerateHash("frandepe"),
+                    Name = "Francisco",
+                    LastName = "Depetrini",
+                    Nationality = "Argentino",
+                    Dni = 45838091,
+                    Phone = "3472582334",
+                    Age = 19
                 },
 
                 new UserClient
                 {
-                    id = 6,
-                    email = "marmax0504@gmail.com",
-                    password = HashGenerator.GenerateHash("marmax"),
-                    name = "Maximo",
-                    lastName = "Martin",
-                    nationality = "Argentino",
-                    dni = 44778419,
-                    phone = "3496502453",
-                    age = 21
+                    Id = 6,
+                    Email = "marmax0504@gmail.com",
+                    Password = HashGenerator.GenerateHash("marmax"),
+                    Name = "Maximo",
+                    LastName = "Martin",
+                    Nationality = "Argentino",
+                    Dni = 44778419,
+                    Phone = "3496502453",
+                    Age = 21
                 },
             };
         }
-        
-        
+
+
         ///Vuelos creados
-        private Object[] CreateFlightDataSeed()
+        private Flight[] CreateFlightDataSeed()
         {
 
-            return new Object[]
+            return new Flight[]
             {
-                new
+                new Flight
                 {
-                    id = 1,
-                    travel = "Ida",
-                    departure= "Rosario (Ros)",
-                    arrival="Buenos Aires (Bsas)",
-                    dateGo= new DateTime(2024,10, 25),
-                    timeDepartureGo = "12:00",
-                    timeArrivalGo = "15:00",
-                    duration = "3hs",
-                    totalAmountEconomic = 100,
-                    freeEconomicSeats = 0,
-                    totalAmountFirstClass = 25,
-                    freeFirstClassSeats = 0,
-                    priceDefault = 85000f,
-                    UserAirlineid = 2,
-                    airline = "Emirates"
+                    Id = 1,
+                    Travel = "Ida",
+                    Departure= "Rosario (Ros)",
+                    Arrival="Buenos Aires (Bsas)",
+                    DateGo= new DateTime(2024,10, 25),
+                    TimeDepartureGo = "12:00",
+                    TimeArrivalGo = "15:00",
+                    Duration = "3hs",
+                    TotalAmountEconomic = 100,
+                    FreeEconomicSeats = 0,
+                    TotalAmountFirstClass = 25,
+                    FreeFirstClassSeats = 0,
+                    PriceDefault = 85000f,
+                    UserAirlineId = 2,
+                    Airline = "Emirates"
 
-                } , new
+                } , new Flight
                 {
-                    id = 2,
-                    travel = "IDAyVUELTA",
-                    departure= "Rosario (Ros)",
-                    arrival="Buenos Aires (Bsas)",
-                    dateGo= new DateTime(2024,10,25),
-                    timeDepartureGo = "12:00",
-                    timeArrivalGo = "15:00",
-                    dateBack= new DateTime(2024,11,25),
-                    timeDepartureBack = "22:00",
-                    timeArrivalBack = "01:00",
-                    duration = "3hs",
-                    totalAmountEconomic = 100,
-                    freeEconomicSeats = 0,
-                    totalAmountFirstClass = 25,
-                    freeFirstClassSeats = 0,
-                    priceDefault = 85000f,
-                    UserAirlineid = 3,
-                    airline = "Flybondi",
+                    Id = 2,
+                    Travel = "IDAyVUELTA",
+                    Departure= "Rosario (Ros)",
+                    Arrival="Buenos Aires (Bsas)",
+                    DateGo= new DateTime(2024,10,25),
+                    TimeDepartureGo = "12:00",
+                    TimeArrivalGo = "15:00",
+                    DateBack= new DateTime(2024,11,25),
+                    TimeDepartureBack = "22:00",
+                    TimeArrivalBack = "01:00",
+                    Duration = "3hs",
+                    TotalAmountEconomic = 100,
+                    FreeEconomicSeats = 0,
+                    TotalAmountFirstClass = 25,
+                    FreeFirstClassSeats = 0,
+                    PriceDefault = 85000f,
+                    UserAirlineId = 3,
+                    Airline = "Flybondi",
 
                 }
             };
         }
+    
 
     }
 }

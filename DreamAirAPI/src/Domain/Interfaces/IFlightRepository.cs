@@ -13,8 +13,8 @@ namespace Domain.Interfaces
         List<Flight> Get();
         Flight GetById(int id);
 
-        int Delete(int id);
+        int Delete(Flight flightFound);
 
-        int Update(int id, Flight flight);
+        int Update(Flight flightFound, Flight flight);
     }
 }

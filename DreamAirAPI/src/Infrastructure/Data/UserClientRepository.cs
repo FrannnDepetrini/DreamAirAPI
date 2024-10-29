@@ -10,62 +10,52 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
-    public class UserClientRepository: IUserClientRepository
+    public class UserClientRepository : IUserClientRepository
     {
         private readonly ApplicationContext _context;
-        public UserClientRepository(ApplicationContext context  )
+        public UserClientRepository(ApplicationContext context)
         {
             _context = context;
         }
 
         public int Create(UserClient client)
         {
-            _context.Set<UserClient>().Add( client );
+            _context.Set<UserClient>().Add(client);
             _context.SaveChanges();
             return 1;
         }
-        
+
 
         public List<UserClient> Get()
         {
-            return _context.Set<UserClient>().Include(uc => uc.tickets).ThenInclude(t => t.flight).ToList();
+            return _context.Set<UserClient>().Include(uc => uc.Tickets).ThenInclude(t => t.Flight).ToList();
         }
 
-        
-        public UserClient GetById(int id) 
+
+        public UserClient GetById(int id)
         {
-            return _context.Set<UserClient>().Include(uc => uc.tickets).ThenInclude(t => t.flight).FirstOrDefault(uc => uc.id == id);
+            return _context.Set<UserClient>().Include(uc => uc.Tickets).ThenInclude(t => t.Flight).FirstOrDefault(uc => uc.Id == id);
 
         }
 
-        public UserClient GetByEmail(string email)
-        {
-            return _context.Set<UserClient>().FirstOrDefault(uc => uc.email == email);
 
-        }
-        public int Delete(int id)
+        public int Delete(UserClient clientFound)
         {
-            UserClient? clientFound = _context.Set<UserClient>().Find(id);
+            _context.Set<UserClient>().Remove(clientFound);
+            _context.SaveChanges();
+            return 1;
 
-            if (clientFound != null) {
-                _context.Set<UserClient>().Remove(clientFound);
-                _context.SaveChanges();
-                return 1;
-                } else
-            {
-                return 0;
-            }
         }
 
         public List<Ticket> GetTickets(int id)
         {
             return _context.Set<UserClient>()
-        .Include(uc => uc.tickets)
-            .ThenInclude(ticket => ticket.flight)
-        .Include(uc => uc.tickets)
-            .ThenInclude(ticket => ticket.user) // Incluir el usuario relacionado
-        .Where(uc => uc.id == id)
-        .SelectMany(uc => uc.tickets)
+        .Include(uc => uc.Tickets)
+            .ThenInclude(ticket => ticket.Flight)
+        .Include(uc => uc.Tickets)
+            .ThenInclude(ticket => ticket.User) // Incluir el usuario relacionado
+        .Where(uc => uc.Id == id)
+        .SelectMany(uc => uc.Tickets)
         .ToList();
         }
     }

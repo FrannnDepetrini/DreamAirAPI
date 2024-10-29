@@ -30,26 +30,26 @@ namespace Application.Services
         public int Create(TicketRequest ticket, int userId)
         {
 
-            var flightFound = _flightRepository.GetById(ticket.flightId);
+            var flightFound = _flightRepository.GetById(ticket.FlightId);
             if (flightFound == null) throw new Exception("Flight not found.");
             var clientFound = _userClientRepository.GetById(userId);
             if (clientFound == null) throw new Exception("User not found.");
-            if (ticket.classSeat != "Economic" && ticket.classSeat != "FirstClass")
+            if (ticket.ClassSeat != "Economic" && ticket.ClassSeat != "FirstClass")
             {
                 throw new Exception("Invalid class seat. Only 'Economic' or 'FirstClass' are allowed.");
             }
-            if (ticket.classSeat == "FirstClass" && flightFound.freeFirstClassSeats == flightFound.totalAmountFirstClass || ticket.classSeat == "Economic" && flightFound.freeEconomicSeats == flightFound.totalAmountEconomic) throw new Exception("No hay tickets disponibles");
+            if (ticket.ClassSeat == "FirstClass" && flightFound.FreeFirstClassSeats == flightFound.TotalAmountFirstClass || ticket.ClassSeat == "Economic" && flightFound.FreeEconomicSeats == flightFound.TotalAmountEconomic) throw new Exception("No hay tickets disponibles");
             
 
 
             Ticket ticket1 = new Ticket
             {
-                classSeat = ticket.classSeat,
-                user = clientFound,
-                flight = flightFound
+                ClassSeat = ticket.ClassSeat,
+                User = clientFound,
+                Flight = flightFound
             };
 
-            flightFound.CalculateSeat(ticket.classSeat);
+            flightFound.CalculateSeat(ticket.ClassSeat);
             ticket1.CalculatePrice();
             ticket1.SeatSelected();
             return _ticketRepository.Create(ticket1);
@@ -61,7 +61,7 @@ namespace Application.Services
             if (ticketFound == null) throw new Exception("Ticket not found.");
             var clietnFound = _userClientRepository.GetById(userId);
             if (clietnFound == null) throw new Exception("User not found.");
-            if (ticketFound.user.id == clietnFound.id)
+            if (ticketFound.User.Id == clietnFound.Id)
             {
                 return _ticketRepository.Delete(ticketFound);
 

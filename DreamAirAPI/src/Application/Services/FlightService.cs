@@ -14,13 +14,16 @@ namespace Application.Services
     public class FlightService : IFlightService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IUserAirlineRepository _userAirlineRepository;
         private readonly IFlightRepository _flightRepository;
-        public FlightService(IFlightRepository flightRepository, IUserRepository userRepository)
+        public FlightService(IFlightRepository flightRepository, IUserRepository userRepository, IUserAirlineRepository userAirlineRepository)
         {
             _flightRepository = flightRepository;
             _userRepository = userRepository;
+            _userAirlineRepository = userAirlineRepository;
+
         }
-        
+
 
         public List<FlightDto> Get()
         {
@@ -33,10 +36,19 @@ namespace Application.Services
             return FlightDto.Create(_flightRepository.GetById(id));
         }
 
-        public int Delete(int id)
+        public int Delete(int flightId, int userId)
         {
+            var flightFound = _flightRepository.GetById(flightId);
+            if (flightFound == null) throw new Exception("Flight not found");
+            var airlineFound = _userAirlineRepository.GetById(userId);
+            if (airlineFound == null) throw new Exception("Airline not found");
 
-            return _flightRepository.Delete(id);
+            if (flightFound.UserAirlineId == airlineFound.Id)
+            {
+                return _flightRepository.Delete(flightFound);
+
+            }
+            throw new Exception("The specified flight does not belong to the airline.");
         }
 
         public int Create(FlightRequest flight, int userId)
@@ -46,20 +58,20 @@ namespace Application.Services
             {
                 Flight flight1 = new Flight
                 {
-                    travel = flight.travel,
-                    departure = flight.departure,
-                    arrival = flight.arrival,
-                    dateGo = flight.dateGo,
-                    timeDepartureGo = flight.timeDepartureGo,
-                    timeArrivalGo = flight.timeArrivalGo,
-                    dateBack = flight.dateBack ?? null,
-                    timeDepartureBack = flight.timeDepartureBack ?? null,
-                    timeArrivalBack = flight.timeArrivalBack ?? null,
-                    totalAmountEconomic = flight.totalAmountEconomic,
-                    totalAmountFirstClass = flight.totalAmountFirstClass,
-                    priceDefault = flight.priceDefault,
+                    Travel = flight.Travel,
+                    Departure = flight.Departure,
+                    Arrival = flight.Arrival,
+                    DateGo = flight.DateGo,
+                    TimeDepartureGo = flight.TimeDepartureGo,
+                    TimeArrivalGo = flight.TimeArrivalGo,
+                    DateBack = flight.DateBack ?? null,
+                    TimeDepartureBack = flight.TimeDepartureBack ?? null,
+                    TimeArrivalBack = flight.TimeArrivalBack ?? null,
+                    TotalAmountEconomic = flight.TotalAmountEconomic,
+                    TotalAmountFirstClass = flight.TotalAmountFirstClass,
+                    PriceDefault = flight.PriceDefault,
                     UserAirline = userAirline,
-                    airline = userAirline.name,
+                    Airline = userAirline.Name,
 
                 };
                 flight1.CalculateDuration();
@@ -70,16 +82,19 @@ namespace Application.Services
 
         public int Update(FlightUpdateRequest flight)
         {
-            Flight flight1 = new Flight 
-            { 
-                dateGo = flight.dateGo, 
-                timeDepartureGo = flight.timeDepartureGo, 
-                timeArrivalGo = flight.timeArrivalGo,
-                dateBack = flight.dateBack ?? null,
-                timeDepartureBack = flight.timeDepartureBack ?? null,
-                timeArrivalBack = flight.timeArrivalBack
+            var flightFound = _flightRepository.GetById(flight.FlightId);
+            if (flightFound == null) throw new Exception("Flight not found");
+            Flight flight1 = new Flight
+            {
+                DateGo = flight.DateGo,
+                TimeDepartureGo = flight.TimeDepartureGo,
+                TimeArrivalGo = flight.TimeArrivalGo,
+                DateBack = flight.DateBack ?? null,
+                TimeDepartureBack = flight.TimeDepartureBack ?? null,
+                TimeArrivalBack = flight.TimeArrivalBack
             };
-            return _flightRepository.Update(flight.flightId, flight1);
+            flight1.CalculateDuration();
+            return _flightRepository.Update(flightFound, flight1);
         }
 
     }

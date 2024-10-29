@@ -20,7 +20,12 @@ namespace Infrastructure.Data
 
         public List<string> GetAirlines()
         {
-          return  _context.Set<UserAirline>().Select(user => user.name).ToList();
+          return  _context.Set<UserAirline>().Select(user => user.Name).ToList();
+        }
+
+        public UserAirline GetById(int id)
+        {
+            return _context.Set<UserAirline>().Find(id);
         }
 
         public int Create(UserAirline airline)
@@ -32,7 +37,7 @@ namespace Infrastructure.Data
 
         public List<Flight> GetFlights(int id) 
         {
-            return _context.Set<UserAirline>().Include(ua => ua.flights).Where(ua => ua.id == id).SelectMany(ua => ua.flights).ToList();
+            return _context.Set<UserAirline>().Include(ua => ua.Flights).Where(ua => ua.Id == id).SelectMany(ua => ua.Flights).ToList();
         }
     }
 }

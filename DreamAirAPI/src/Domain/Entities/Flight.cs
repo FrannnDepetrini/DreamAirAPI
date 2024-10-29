@@ -13,61 +13,51 @@ namespace Domain.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id { get; set; }
+        public int Id { get; set; }
 
-        public string travel {  get; set; }
-        public string departure { get; set; }
-        public string arrival { get; set; }
-        public DateTime dateGo { get; set; }
-        public string timeDepartureGo { get; set; }
-        public string timeArrivalGo { get; set; }
+        public string Travel {  get; set; }
+        public string Departure { get; set; }
+        public string Arrival { get; set; }
+        public DateTime DateGo { get; set; }
+        public string TimeDepartureGo { get; set; }
+        public string TimeArrivalGo { get; set; }
 
-        public DateTime? dateBack { get; set; } 
-        public string? timeDepartureBack { get; set; }
-        public string? timeArrivalBack { get; set; }
+        public DateTime? DateBack { get; set; } 
+        public string? TimeDepartureBack { get; set; }
+        public string? TimeArrivalBack { get; set; }
 
-        public string duration { get; set; }  
-        public int totalAmountEconomic { get; set; }
-        public int totalAmountFirstClass { get; set; }
-        public float priceDefault { get; set; }
-        public string airline { get; set; }
-        public List<Ticket>  tickets { get; set; }
+        public string Duration { get; set; }  
+        public int TotalAmountEconomic { get; set; }
+        public int TotalAmountFirstClass { get; set; }
+        public float PriceDefault { get; set; }
+        public string Airline { get; set; }
+        public List<Ticket>  Tickets { get; set; }
         public UserAirline UserAirline { get; set; }
-        public int freeEconomicSeats { get; set; } = 0;
-        public int freeFirstClassSeats { get; set; } = 0;
-        //public void AddTicket(Ticket ticket)
-        //{
-        //    tickets.Add(ticket);
-        //    CalculateSeat();
-        //}
+        public int FreeEconomicSeats { get; set; } = 0;
+        public int FreeFirstClassSeats { get; set; } = 0;
+        public int UserAirlineId { get; set; }
+
 
         public string CalculateSeat(string classSeat)
         {
-            //// Contar cuántos asientos económicos y de primera clase ya están ocupados
-            //int occupiedEconomicSeats = tickets.Count(t => t.classSeat == "Economic");
-            //int occupiedFirstClassSeats = tickets.Count(t => t.classSeat == "FirstClass");
-
-            //// Calcular los asientos libres restando los ocupados del total
-            //freeEconomicSeats = totalAmountEconomic - occupiedEconomicSeats;
-            //freeFirstClassSeats = totalAmountFirstClass - occupiedFirstClassSeats;
             if (classSeat == "Economic")
             {
-                if (freeEconomicSeats == totalAmountEconomic)
+                if (FreeEconomicSeats == TotalAmountEconomic)
                 {
                     return null;
                 } else
                 {
-                    freeEconomicSeats = freeEconomicSeats + 1;
+                    FreeEconomicSeats = FreeEconomicSeats + 1;
                 }
             } else if (classSeat == "FirstClass")
             {
-                if (freeEconomicSeats == totalAmountEconomic)
+                if (FreeEconomicSeats == TotalAmountEconomic)
                 {
                     return "No hay mas asientos disponibles";
                 }
                 else
                 {
-                    freeFirstClassSeats = freeFirstClassSeats + 1;
+                    FreeFirstClassSeats = FreeFirstClassSeats + 1;
                 }
             };
             return "Compra de asiento exitosa";
@@ -75,8 +65,8 @@ namespace Domain.Entities
         
 
         public void CalculateDuration() { 
-                TimeSpan dep = TimeSpan.Parse(timeDepartureGo);
-                TimeSpan arr = TimeSpan.Parse(timeArrivalGo);
+                TimeSpan dep = TimeSpan.Parse(TimeDepartureGo);
+                TimeSpan arr = TimeSpan.Parse(TimeArrivalGo);
                 TimeSpan durationCalculated;
                 if (arr > dep)
                 {
@@ -86,7 +76,7 @@ namespace Domain.Entities
                 {
                     durationCalculated = (arr + TimeSpan.FromDays(1) - dep);
                 }
-                this.duration = $"{(int)durationCalculated.TotalHours:D2}:{durationCalculated.Minutes:D2}Hs";
+                this.Duration = $"{(int)durationCalculated.TotalHours:D2}:{durationCalculated.Minutes:D2}Hs";
         }
     }
 }

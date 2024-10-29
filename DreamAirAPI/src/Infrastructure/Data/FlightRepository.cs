@@ -16,47 +16,46 @@ namespace Infrastructure.Data
 
         public FlightRepository(ApplicationContext context) { _context = context; }
 
-        public int Create(Flight flight) { 
+        public int Create(Flight flight)
+        {
             _context.Set<Flight>().Add(flight);
             _context.SaveChanges();
             return 1;
         }
-        public List<Flight> Get() {
-            
-            
-            return _context.Set<Flight>().Include(f => f.tickets).ThenInclude(t => t.user).ToList();
+        public List<Flight> Get()
+        {
+
+
+            return _context.Set<Flight>().Include(f => f.Tickets).ThenInclude(t => t.User).ToList();
         }
-        public Flight GetById(int id) {
-            return _context.Set<Flight>().Include(f => f.tickets).ThenInclude(t => t.user).FirstOrDefault(f => f.id == id);
+        public Flight GetById(int id)
+        {
+            return _context.Set<Flight>().Include(f => f.Tickets).ThenInclude(t => t.User).FirstOrDefault(f => f.Id == id);
         }
 
-        public int Delete(int id) {
-            Flight? flightFound = _context.Set<Flight>().Find(id);
-            if (flightFound != null)
-            {
+        public int Delete(Flight flightFound)
+        {
 
-                _context.Set<Flight>().Remove(flightFound);
+            _context.Set<Flight>().Remove(flightFound);
             _context.SaveChanges();
-                return 1;   
-            }
-            return 0;
+            return 1;
+
         }
 
-        public int Update(int id, Flight flight) {
-            Flight flightFound = _context.Set<Flight>().Find(id);
-            if (flightFound != null)
-            {
-                flightFound.dateGo = flight.dateGo;
-                flightFound.timeArrivalGo = flight.timeArrivalGo;
-                flightFound.timeDepartureGo = flight.timeDepartureGo;
-                flightFound.dateBack = flight.dateBack ?? null;
-                flightFound.timeArrivalBack = flight.timeArrivalBack ?? null;
-                flightFound.timeDepartureBack = flight.timeDepartureBack ?? null;
-                _context.Set<Flight>().Update(flightFound);
-                _context.SaveChanges();
+        public int Update(Flight flightFound, Flight flight)
+        {
+
+            flightFound.DateGo = flight.DateGo;
+            flightFound.TimeArrivalGo = flight.TimeArrivalGo;
+            flightFound.TimeDepartureGo = flight.TimeDepartureGo;
+            flightFound.DateBack = flight.DateBack ?? null;
+            flightFound.TimeArrivalBack = flight.TimeArrivalBack ?? null;
+            flightFound.TimeDepartureBack = flight.TimeDepartureBack ?? null;
+            flightFound.Duration = flight.Duration;
+            _context.Set<Flight>().Update(flightFound);
+            _context.SaveChanges();
             return 1;
-            }
-            return 0;
+
         }
     }
 }

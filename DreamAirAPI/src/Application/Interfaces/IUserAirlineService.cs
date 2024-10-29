@@ -16,5 +16,6 @@ namespace Application.Interfaces
         int Create(UserAirlineRequest userAirline);
 
         List<FlightDto> GetFlights(int id);
+
     }
 }

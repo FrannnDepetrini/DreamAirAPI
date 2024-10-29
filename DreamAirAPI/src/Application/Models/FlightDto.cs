@@ -9,45 +9,47 @@ namespace Application.Models
 {
     public class FlightDto
     {
-        public int id { get; set; }
-        public string travel {  get; set; }
-        public string departure { get; set; }
-        public string arrival { get; set; }
-        public DateTime dateGo { get; set; }
-        public string timeDepartureGo { get; set; }
-        public string timeArrivalGo { get; set; }
+        public int Id { get; set; }
+        public string Travel {  get; set; }
+        public string Departure { get; set; }
+        public string Arrival { get; set; }
+        public DateTime DateGo { get; set; }
+        public string TimeDepartureGo { get; set; }
+        public string TimeArrivalGo { get; set; }
 
-        public DateTime? dateBack { get; set; }
-        public string? timeDepartureBack { get; set; }
-        public string? timeArrivalBack { get; set; }
-        public string duration { get; set; }
-        public int totalAmountEconomic { get; set; }
-        public int totalAmountFirstClass { get; set; }
-        public float priceDefault { get; set; }
-        public int freeEconomicSeats { get; set; }
-        public int freeFirstClassSeats { get; set; }
+        public DateTime? DateBack { get; set; }
+        public string? TimeDepartureBack { get; set; }
+        public string? TimeArrivalBack { get; set; }
+        public string Duration { get; set; }
+        public int TotalAmountEconomic { get; set; }
+        public int TotalAmountFirstClass { get; set; }
+        public float PriceDefault { get; set; }
+        public int FreeEconomicSeats { get; set; }
+        public int FreeFirstClassSeats { get; set; }
+        public string Airline {  get; set; }
         
         public static FlightDto Create(Flight flight)
         {
             
             return new FlightDto
             {
-                id = flight.id,
-                travel = flight.travel,
-                departure = flight.departure,
-                arrival = flight.arrival,
-                dateGo = flight.dateGo,
-                timeDepartureGo = flight.timeDepartureGo,
-                timeArrivalGo = flight.timeArrivalGo,
-                dateBack = flight.dateBack ?? null,
-                timeDepartureBack = flight.timeDepartureBack ?? null,
-                timeArrivalBack = flight.timeArrivalBack ?? null,
-                duration = flight.duration,
-                totalAmountEconomic = flight.totalAmountEconomic,
-                totalAmountFirstClass = flight.totalAmountFirstClass,
-                priceDefault = flight.priceDefault,
-                freeEconomicSeats = flight.freeEconomicSeats,
-                freeFirstClassSeats = flight.freeFirstClassSeats
+                Id = flight.Id,
+                Travel = flight.Travel,
+                Departure = flight.Departure,
+                Arrival = flight.Arrival,
+                DateGo = flight.DateGo,
+                TimeDepartureGo = flight.TimeDepartureGo,
+                TimeArrivalGo = flight.TimeArrivalGo,
+                DateBack = flight.DateBack ?? null,
+                TimeDepartureBack = flight.TimeDepartureBack ?? null,
+                TimeArrivalBack = flight.TimeArrivalBack ?? null,
+                Duration = flight.Duration,
+                TotalAmountEconomic = flight.TotalAmountEconomic,
+                TotalAmountFirstClass = flight.TotalAmountFirstClass,
+                PriceDefault = flight.PriceDefault,
+                FreeEconomicSeats = flight.FreeEconomicSeats,
+                FreeFirstClassSeats = flight.FreeFirstClassSeats,
+                Airline = flight.Airline
             };
         }
     }

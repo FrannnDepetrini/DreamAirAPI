@@ -10,18 +10,18 @@ namespace Application.Models
 {
     public class UserClientDto
     {
-        public int id {  get; set; }
-        public string name { get; set; }
-        public string lastName { get; set; }
-        public string nationality { get; set; }
-        public int dni { get; set; }
-        public string phone { get; set; }
-        public int age { get; set; }
-        public List<TicketDto> tickets { get; set; } = new List<TicketDto>();
+        public int Id {  get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
+        public string Nationality { get; set; }
+        public int Dni { get; set; }
+        public string Phone { get; set; }
+        public int Age { get; set; }
+        public List<TicketDto> Tickets { get; set; } = new List<TicketDto>();
 
         public static UserClientDto Create(UserClient userClient) 
         {
-            var listMapped = userClient.tickets.Select(tck =>
+            var listMapped = userClient.Tickets.Select(tck =>
             {
                 return TicketDto.Create(tck);
 
@@ -29,14 +29,14 @@ namespace Application.Models
             });
             return new UserClientDto
             {
-                id = userClient.id,
-                name = userClient.name,
-                lastName = userClient.lastName,
-                nationality = userClient.nationality,
-                dni = userClient.dni,
-                phone = userClient.phone,
-                age = userClient.age,
-                tickets = listMapped.ToList()
+                Id = userClient.Id,
+                Name = userClient.Name,
+                LastName = userClient.LastName,
+                Nationality = userClient.Nationality,
+                Dni = userClient.Dni,
+                Phone = userClient.Phone,
+                Age = userClient.Age,
+                Tickets = listMapped.ToList()
             };
         }
 

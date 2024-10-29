@@ -10,14 +10,14 @@ namespace Application.Models.Requests
     public class FlightUpdateRequest
     {
 
-        public int flightId { get; set; }
-        public DateTime dateGo { get; set; }
-        public string timeDepartureGo { get; set; }
-        public string timeArrivalGo { get; set; }
+        public int FlightId { get; set; }
+        public DateTime DateGo { get; set; }
+        public string TimeDepartureGo { get; set; }
+        public string TimeArrivalGo { get; set; }
 
-        public DateTime? dateBack { get; set; }
-        public string? timeDepartureBack { get; set; }
-        public string? timeArrivalBack { get; set; }
+        public DateTime? DateBack { get; set; }
+        public string? TimeDepartureBack { get; set; }
+        public string? TimeArrivalBack { get; set; }
 
 
     }

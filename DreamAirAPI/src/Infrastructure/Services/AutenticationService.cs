@@ -31,18 +31,18 @@ namespace Infrastructure.Services
         public User? ValidateUser(LoginRequest userRequest)
         {
 
-            if (string.IsNullOrEmpty(userRequest.email) || string.IsNullOrEmpty(userRequest.password))
+            if (string.IsNullOrEmpty(userRequest.Email) || string.IsNullOrEmpty(userRequest.Password))
             {
                 return null;
             }
 
-            User? user = _userRepository.GetByEmail(userRequest.email);
+            User? user = _userRepository.GetByEmail(userRequest.Email);
 
             if (user == null) return null;
 
-            string passwordHashed = GenerateHash(userRequest.password);
+            string passwordHashed = GenerateHash(userRequest.Password);
 
-            if (passwordHashed == user.password) return user;
+            if (passwordHashed == user.Password) return user;
             return null;
         }
 
@@ -53,9 +53,9 @@ namespace Infrastructure.Services
 
             var userClaims = new[]
             {
-                new Claim("sub", user.id.ToString()),
-                new Claim("email", user.email),
-                new Claim("role", user.role)
+                new Claim("sub", user.Id.ToString()),
+                new Claim("email", user.Email),
+                new Claim("role", user.Role)
             };
 
             var seccurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_options.SecretForKey));

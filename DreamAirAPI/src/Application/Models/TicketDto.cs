@@ -9,23 +9,23 @@ namespace Application.Models
 {
     public class TicketDto
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public string Seat { get; set; } //numero de asiento
-        public string classSeat { get; set; }
+        public string ClassSeat { get; set; }
         public string State { get; set; }
         public double Price { get; set; }
 
-        public string fullName { get; set; }
-        public int dni { get; set; }
-        public string timeDepartureGo { get; set; }
+        public string FullName { get; set; }
+        public int Dni { get; set; }
+        public string TimeDepartureGo { get; set; }
 
-        public string timeArrivalGo { get; set; }
-        public DateTime dateGo {  get; set; }
+        public string TimeArrivalGo { get; set; }
+        public DateTime DateGo {  get; set; }
 
-        public string? timeDepartureBack { get; set; }
+        public string? TimeDepartureBack { get; set; }
 
-        public string? timeArrivalBack { get; set; }
-        public DateTime? dateBack { get; set; }
+        public string? TimeArrivalBack { get; set; }
+        public DateTime? DateBack { get; set; }
 
 
 
@@ -33,19 +33,19 @@ namespace Application.Models
         {
             return new TicketDto
             {
-                id = ticket.id,
+                Id = ticket.Id,
                 Seat = ticket.Seat,
-                classSeat = ticket.classSeat,
+                ClassSeat = ticket.ClassSeat,
                 State = ticket.State,
                 Price = ticket.Price,
-                fullName = $"{ticket.user.name} {ticket.user.lastName}",
-                dni = ticket.user.dni,
-                timeDepartureGo = ticket.flight.timeDepartureGo,
-                timeArrivalGo = ticket.flight.timeArrivalGo,
-                dateGo = ticket.flight.dateGo,
-                timeDepartureBack = ticket.flight.timeDepartureBack ?? null,
-                timeArrivalBack = ticket.flight.timeArrivalBack ?? null,
-                dateBack = ticket.flight.dateBack ?? null
+                FullName = $"{ticket.User.Name} {ticket.User.LastName}",
+                Dni = ticket.User.Dni,
+                TimeDepartureGo = ticket.Flight.TimeDepartureGo,
+                TimeArrivalGo = ticket.Flight.TimeArrivalGo,
+                DateGo = ticket.Flight.DateGo,
+                TimeDepartureBack = ticket.Flight.TimeDepartureBack ?? null,
+                TimeArrivalBack = ticket.Flight.TimeArrivalBack ?? null,
+                DateBack = ticket.Flight.DateBack ?? null
             };
 
         }

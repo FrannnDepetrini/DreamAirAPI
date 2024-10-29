@@ -10,22 +10,22 @@ namespace Application.Models.Requests
     public class UserClientRequest
     {
         [Required]
-        public string email { get; set; }
+        public string Email { get; set; }
         [Required] 
-        public string password { get; set; }
+        public string Password { get; set; }
         [Required]
-        public string name { get; set; }
+        public string Name { get; set; }
         [Required] 
-        public string lastName { get; set; }
+        public string LastName { get; set; }
         
-        public string nationality { get; set; }
+        public string Nationality { get; set; }
 
         [Required]
-        public int dni { get; set; }
+        public int Dni { get; set; }
         
-        public string phone { get; set; }
+        public string Phone { get; set; }
         [Required]
-        public int age { get; set; }
+        public int Age { get; set; }
 
     }
 }

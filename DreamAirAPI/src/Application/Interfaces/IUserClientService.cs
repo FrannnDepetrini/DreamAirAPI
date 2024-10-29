@@ -14,15 +14,11 @@ namespace Application.Interfaces
         int Create(UserClientRequest client);
 
         List<UserClientDto> Get();
-        
-        UserClientDto GetById(int id);
 
-        UserClientDto GetByEmail(string email);
+        UserClientDto GetById(int id);
 
         int Delete(int id);
 
         List<TicketDto> GetTickets(int id);
-
-
     }
 }

@@ -13,32 +13,32 @@ namespace Domain.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id { get; set; }
+        public int Id { get; set; }
         public string Seat { get; set; } //numero de asiento
-        public string classSeat { get; set; }
+        public string ClassSeat { get; set; }
         public string State { get; set; } = "Activo";
         public double Price { get; set; }
-        public UserClient user { get; set; }
-        public Flight flight { get; set; }
+        public UserClient User { get; set; }
+        public Flight Flight { get; set; }
 
         public void CalculatePrice()
         {
-            if (classSeat == "Economic")
-            { Price = flight.priceDefault * 1.3; }
+            if (ClassSeat == "Economic")
+            { Price = Flight.PriceDefault * 1.3; }
             else
-            { Price = flight.priceDefault * 1.5; }
+            { Price = Flight.PriceDefault * 1.5; }
 
 
         }
         public void SeatSelected()
         {
-            if (classSeat == "Economic")
+            if (ClassSeat == "Economic")
             {
-                Seat = "E" + flight.freeEconomicSeats;
+                Seat = "E" + Flight.FreeEconomicSeats;
             }
             else
             {
-                Seat = "F" + flight.freeFirstClassSeats;
+                Seat = "F" + Flight.FreeFirstClassSeats;
             }
         }
 

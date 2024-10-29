@@ -17,5 +17,7 @@ namespace Domain.Interfaces
         User UpdateRole(User user, string newRole);
 
         User Delete(User user);
+
+        bool ValidateEmail(string email);
     }
 }

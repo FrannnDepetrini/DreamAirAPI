@@ -31,10 +31,10 @@ namespace Application.Services
         {
             UserAirline airline1 = new UserAirline
             {
-                email = airline.email,
-                password = _authenticationService.GenerateHash(airline.password),
-                name = airline.name,
-                role= "airline"
+                Email = airline.Email,
+                Password = _authenticationService.GenerateHash(airline.Password),
+                Name = airline.Name,
+                Role= "airline"
 
             };
 

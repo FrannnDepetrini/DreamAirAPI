@@ -14,5 +14,7 @@ namespace Domain.Interfaces
         int Create(UserAirline airline);
 
         List<Flight> GetFlights(int id);
+
+        UserAirline GetById(int id);
     }
 }

@@ -11,10 +11,10 @@ namespace Application.Models.Requests
     public class TicketRequest
     {
         [Required]
-        public string classSeat { get; set; }
+        public string ClassSeat { get; set; }
 
 
         [Required]
-        public int flightId { get; set; }
+        public int FlightId { get; set; }
     }
 }
