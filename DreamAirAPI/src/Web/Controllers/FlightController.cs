@@ -16,11 +16,10 @@ namespace Web.Controllers
     public class FlightController : ControllerBase
     {
         private readonly IFlightService _flightService;
-        private readonly IUserService _userService;
-        public FlightController(IFlightService flightService, IUserService userService)
+       
+        public FlightController(IFlightService flightService)
         {
             _flightService = flightService;
-            _userService = userService;
         }
 
 
@@ -29,6 +28,7 @@ namespace Web.Controllers
         {
             return Ok(_flightService.Get());
         }
+
         [HttpGet("get/{id}")]
         public IActionResult GetById([FromRoute] int id)
         {
@@ -42,7 +42,6 @@ namespace Web.Controllers
         }
        
         [HttpPost("[action]")]
-
         [Authorize(Policy = "AirlinePolicy")]
         public IActionResult Create(FlightRequest flight)
         {
@@ -57,10 +56,11 @@ namespace Web.Controllers
         [Authorize(Policy = "AdminOrAirlinePolicy")]
         public IActionResult Delete([FromRoute] int id)
         {
-            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "");
+            if (userId == null) throw new Exception("ID Not found");
             var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
 
-            return Ok(_flightService.Delete(id, int.Parse(userId), userRole));
+            return Ok(_flightService.Delete(id,userId, userRole));
         }
 
         [HttpPut("[action]")]

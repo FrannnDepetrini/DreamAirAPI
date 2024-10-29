@@ -16,7 +16,7 @@ namespace Web.Controllers
             _autenticationService = autenticationService;
         }
         [HttpPost("[action]")]
-        public IActionResult login(LoginRequest user)
+        public IActionResult Login(LoginRequest user)
         {
 
             return Ok(_autenticationService.Authenticate(user));

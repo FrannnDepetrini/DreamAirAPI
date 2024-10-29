@@ -11,9 +11,9 @@ namespace Application.Models.Requests
     {
 
         public int FlightId { get; set; }
-        public DateTime DateGo { get; set; }
-        public string TimeDepartureGo { get; set; }
-        public string TimeArrivalGo { get; set; }
+        public DateTime? DateGo { get; set; }
+        public string? TimeDepartureGo { get; set; }
+        public string? TimeArrivalGo { get; set; }
 
         public DateTime? DateBack { get; set; }
         public string? TimeDepartureBack { get; set; }

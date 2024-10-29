@@ -13,13 +13,12 @@ namespace Application.Services
 {
     public class FlightService : IFlightService
     {
-        private readonly IUserRepository _userRepository;
+       
         private readonly IUserAirlineRepository _userAirlineRepository;
         private readonly IFlightRepository _flightRepository;
-        public FlightService(IFlightRepository flightRepository, IUserRepository userRepository, IUserAirlineRepository userAirlineRepository)
+        public FlightService(IFlightRepository flightRepository, IUserAirlineRepository userAirlineRepository)
         {
             _flightRepository = flightRepository;
-            _userRepository = userRepository;
             _userAirlineRepository = userAirlineRepository;
 
         }
@@ -87,12 +86,12 @@ namespace Application.Services
             if (flightFound == null) throw new Exception("Flight not found");
             Flight flight1 = new Flight
             {
-                DateGo = flight.DateGo,
-                TimeDepartureGo = flight.TimeDepartureGo,
-                TimeArrivalGo = flight.TimeArrivalGo,
-                DateBack = flight.DateBack ?? null,
-                TimeDepartureBack = flight.TimeDepartureBack ?? null,
-                TimeArrivalBack = flight.TimeArrivalBack
+                DateGo = flight.DateGo ?? flightFound.DateGo,
+                TimeDepartureGo = flight.TimeDepartureGo ?? flightFound.TimeDepartureGo,
+                TimeArrivalGo = flight.TimeArrivalGo ?? flightFound.TimeArrivalGo ,
+                DateBack = flight.DateBack ?? flightFound.DateBack,
+                TimeDepartureBack = flight.TimeDepartureBack ?? flight.TimeDepartureGo,
+                TimeArrivalBack = flight.TimeArrivalBack ?? flightFound.TimeArrivalBack,
             };
             flight1.CalculateDuration();
             return _flightRepository.Update(flightFound, flight1);
