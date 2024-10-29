@@ -37,7 +37,7 @@ namespace Application.Services
             {
                 throw new Exception("Invalid class seat. Only 'Economic' or 'FirstClass' are allowed.");
             }
-            if (ticket.ClassSeat == "FirstClass" && flightFound.FreeFirstClassSeats == flightFound.TotalAmountFirstClass || ticket.ClassSeat == "Economic" && flightFound.FreeEconomicSeats == flightFound.TotalAmountEconomic) throw new Exception("No hay tickets disponibles");
+            if (ticket.ClassSeat == "FirstClass" && flightFound.FreeFirstClassSeats == flightFound.TotalAmountFirstClass || ticket.ClassSeat == "Economic" && flightFound.FreeEconomicSeats == flightFound.TotalAmountEconomic) throw new Exception("No tickets available");
             
 
 

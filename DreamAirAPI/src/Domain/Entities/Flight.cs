@@ -38,29 +38,15 @@ namespace Domain.Entities
         
 
 
-        public string CalculateSeat(string classSeat)
+        public void CalculateSeat(string classSeat)
         {
             if (classSeat == "Economic")
             {
-                if (FreeEconomicSeats == TotalAmountEconomic)
-                {
-                    return null;
-                } else
-                {
-                    FreeEconomicSeats = FreeEconomicSeats + 1;
-                }
-            } else if (classSeat == "FirstClass")
+                    FreeEconomicSeats = FreeEconomicSeats + 1;  
+            } else 
             {
-                if (FreeEconomicSeats == TotalAmountEconomic)
-                {
-                    return "No hay mas asientos disponibles";
-                }
-                else
-                {
                     FreeFirstClassSeats = FreeFirstClassSeats + 1;
-                }
             };
-            return "Compra de asiento exitosa";
         }
         
 
