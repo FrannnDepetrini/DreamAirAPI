@@ -90,6 +90,26 @@ setupAction.AddSecurityRequirement(new OpenApiSecurityRequirement
 
 });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("admin"));
+    options.AddPolicy("AirlinePolicy", policy => policy.RequireRole("airline"));
+    options.AddPolicy("ClientPolicy", policy => policy.RequireRole("client"));
+    options.AddPolicy("AdminOrAirlinePolicy", policy =>
+        policy.RequireAssertion(context =>
+            context.User.IsInRole("admin") ||
+            context.User.IsInRole("airline")));
+    //options.AddPolicy("AdminOrClient", policy =>
+    //    policy.RequireAssertion(context =>
+    //        context.User.IsInRole("admin") ||
+    //        context.User.IsInRole("client")));
+    //options.AddPolicy("EveryoneExceptGuests", policy =>
+    //    policy.RequireAssertion(context =>
+    //        context.User.IsInRole(UserType.Customer.ToString()) ||
+    //        context.User.IsInRole(UserType.Seller.ToString()) ||
+    //        context.User.IsInRole(UserType.Admin.ToString())));
+});
+
 
 builder.Services.AddCors(options =>
 {

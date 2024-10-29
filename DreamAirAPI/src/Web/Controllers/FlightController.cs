@@ -29,8 +29,8 @@ namespace Web.Controllers
         {
             return Ok(_flightService.Get());
         }
-        [HttpGet("[action]")]
-        public IActionResult GetById(int id)
+        [HttpGet("get/{id}")]
+        public IActionResult GetById([FromRoute] int id)
         {
             var flight = _flightService.GetById(id);
             if (flight == null) 
@@ -43,7 +43,7 @@ namespace Web.Controllers
        
         [HttpPost("[action]")]
 
-        [Authorize]
+        [Authorize(Policy = "AirlinePolicy")]
         public IActionResult Create(FlightRequest flight)
         {
             int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "");
@@ -53,15 +53,18 @@ namespace Web.Controllers
 
         }
 
-        [HttpDelete("[action]")]
-        [Authorize]
-        public IActionResult Delete([FromBody] int id)
+        [HttpDelete("delete/{id}")]
+        [Authorize(Policy = "AdminOrAirlinePolicy")]
+        public IActionResult Delete([FromRoute] int id)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            return Ok(_flightService.Delete(id, int.Parse(userId)));
+            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+            return Ok(_flightService.Delete(id, int.Parse(userId), userRole));
         }
 
         [HttpPut("[action]")]
+        [Authorize(Policy = "AirlinePolicy")]
         public IActionResult Update([FromBody] FlightUpdateRequest flight)
         {
             return Ok(_flightService.Update(flight));

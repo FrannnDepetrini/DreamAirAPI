@@ -54,8 +54,10 @@ namespace Application.Services
 
         public UserClientDto GetById(int id)
         {
+            var userFound = _userClientRepository.GetById(id);
+            if (userFound == null) throw new Exception("User not found");
 
-            return UserClientDto.Create(_userClientRepository.GetById(id));
+            return UserClientDto.Create(userFound);
         }
 
         public int Delete(int id)

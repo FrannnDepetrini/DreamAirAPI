@@ -10,7 +10,7 @@ namespace Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Policy = "AdminPolicy")]
     public class UserAdminController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -29,68 +29,26 @@ namespace Web.Controllers
         public IActionResult Get()
         {
 
-            var userRole = User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Role)?.Value;
-            if (userRole == null) return NotFound();
-
-            if (userRole == "admin") {
-                return Ok(_userService.Get());
-            }
-            return Forbid();
+            
+          return Ok(_userService.Get());
+            
+         
         }
 
-        [HttpPost("[action]")]
-        public IActionResult CreateClient(UserClientRequest client)
+        
+
+       
+        [HttpPut("update/{id}")]
+        public IActionResult UpdateRole([FromRoute] int id,string newRole) 
         {
-            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-
-            if (userRole == "admin")
-            {
-                return Ok(_userClientService.Create(client));
-
-            }
-            return Forbid();
+            return Ok(_userService.UpdateRole(newRole, id));
         }
 
-        [HttpPost("[action]")]
-        public IActionResult CreateAirline(UserAirlineRequest airline)
+        [HttpDelete("delete/{id}")]
+        [Authorize(Policy = "AdminPolicy")]
+        public IActionResult Delete([FromRoute] int id)
         {
-
-            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-
-            if (userRole == "admin")
-            {
-                return Ok(_userAirlineService.Create(airline));
-
-            }
-            return Forbid();
-        }
-
-        [HttpPut("[action]")]
-        public IActionResult UpdateRole(string newRole, int id) 
-        {
-            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-
-            if (userRole == "admin")
-            {
-                return Ok(_userService.UpdateRole(newRole, id));
-
-            }
-            return Forbid();
-        }
-
-        [HttpDelete("[action]")]
-
-        public IActionResult Delete(int id) 
-        {
-
-            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-
-            if (userRole == "admin")
-            {
-                return Ok(_userService.Delete(id));
-
-            }
-            return Forbid();
+            return Ok(_userService.Delete(id));
         }
     }
 }

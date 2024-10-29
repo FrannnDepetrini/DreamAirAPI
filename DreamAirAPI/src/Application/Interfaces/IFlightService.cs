@@ -15,7 +15,7 @@ namespace Application.Interfaces
         List<FlightDto> Get();
         FlightDto GetById(int id);
 
-        int Delete(int flightId, int userId);
+        int Delete(int flightId, int userId, string userRole);
 
         int Update(FlightUpdateRequest flight);
 

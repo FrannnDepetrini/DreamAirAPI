@@ -12,7 +12,7 @@ namespace Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    
     public class UserAirlineController : ControllerBase
     {
         private readonly IUserAirlineService _userAirlineService;
@@ -34,46 +34,21 @@ namespace Web.Controllers
         }
 
         [HttpPost("[action]")]
+        [Authorize(Policy = "AdminPolicy")]
         public IActionResult Create(UserAirlineRequest airline)
         {
-            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-
-            if (userRole == "airline")
-            {
-                return Ok(_userAirlineService.Create(airline));
-
-            }
-            return Forbid();
+          return Ok(_userAirlineService.Create(airline));
         }
 
         [HttpGet("[action]")]
-        
+        [Authorize(Policy = "AirlinePolicy")]
         public IActionResult GetFlights()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-
-            if (userRole == "airline")
-            {
-                return Ok(_userAirlineService.GetFlights(int.Parse(userId)));
-
-            }
-            return Forbid();
+            return Ok(_userAirlineService.GetFlights(int.Parse(userId)));
         }
 
-        [HttpGet("[action]")]
-        public IActionResult GetByEmail(int id)
-        {
-
-            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-
-            if (userRole == "airline")
-            {
-                return Ok(_userService.GetById(id));
-            }
-            return Forbid();
-
-        }
+       
 
 
     }

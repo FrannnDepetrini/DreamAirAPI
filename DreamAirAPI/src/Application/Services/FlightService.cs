@@ -36,14 +36,14 @@ namespace Application.Services
             return FlightDto.Create(_flightRepository.GetById(id));
         }
 
-        public int Delete(int flightId, int userId)
+        public int Delete(int flightId, int userId, string userRole)
         {
             var flightFound = _flightRepository.GetById(flightId);
             if (flightFound == null) throw new Exception("Flight not found");
-            var airlineFound = _userAirlineRepository.GetById(userId);
-            if (airlineFound == null) throw new Exception("Airline not found");
 
-            if (flightFound.UserAirlineId == airlineFound.Id)
+            
+
+            if (userRole == "admin" || flightFound.UserAirlineId == userId)
             {
                 return _flightRepository.Delete(flightFound);
 

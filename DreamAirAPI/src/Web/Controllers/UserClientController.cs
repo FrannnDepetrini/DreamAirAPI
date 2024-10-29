@@ -30,6 +30,7 @@ namespace Web.Controllers
 
         }
         [HttpGet("[action]")]
+        [Authorize(Policy = "AdminPolicy")]
         public IActionResult Get()
         {
             
@@ -37,16 +38,11 @@ namespace Web.Controllers
         }
 
 
-        [HttpGet("[action]")]
-        public IActionResult GetById(int id)
+        [HttpGet("get/{id}")]
+        [Authorize(Policy = "AdminPolicy")]
+        public IActionResult GetById([FromRoute] int id)
         {
-            var user = _userClientService.GetById(id);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return Ok(user);
+            return Ok(_userClientService.GetById(id));
         }
 
 
@@ -57,7 +53,7 @@ namespace Web.Controllers
         }
 
         [HttpGet("[action]")]
-        [Authorize]
+        [Authorize(Policy = "ClientPolicy")]
         public IActionResult GetTickets()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
@@ -70,11 +66,7 @@ namespace Web.Controllers
             return Forbid();
         }
 
-        [HttpDelete("[action]")]
-        public IActionResult Delete(int id)
-        {
-            return Ok(_userClientService.Delete(id));
-        }
+        
     }
 
 }

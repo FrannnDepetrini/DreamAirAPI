@@ -23,31 +23,22 @@ namespace Web.Controllers
         }
 
         [HttpPost("[action]")]
-
-        [Authorize]
+        [Authorize(Policy = "ClientPolicy")]
         public IActionResult Create(TicketRequest ticket)
         {
             int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "");
-            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-
-            if (userRole == "cliente")
-            {
-                return Ok(_ticketService.Create(ticket, userId));
-            }
-            return Forbid();
+            
+            return Ok(_ticketService.Create(ticket, userId));
+           
         }
 
-        [HttpDelete("[action]")]
-        [Authorize]
-        public IActionResult Delete(int ticketId)
+        [HttpDelete("delete/{ticketId}")]
+        [Authorize(Policy = "ClientPolicy")]
+        public IActionResult Delete([FromRoute] int ticketId)
         {
             int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "");
-            var userRole = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-            if (userRole == "cliente")
-            {
-                return Ok(_ticketService.Delete(ticketId,userId));
-            }
-            return Forbid();
+            return Ok(_ticketService.Delete(ticketId,userId));
+            
 
         }
     }

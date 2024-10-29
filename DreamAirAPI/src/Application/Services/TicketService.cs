@@ -32,8 +32,7 @@ namespace Application.Services
 
             var flightFound = _flightRepository.GetById(ticket.FlightId);
             if (flightFound == null) throw new Exception("Flight not found.");
-            var clientFound = _userClientRepository.GetById(userId);
-            if (clientFound == null) throw new Exception("User not found.");
+            UserClient clientFound = _userClientRepository.GetById(userId);
             if (ticket.ClassSeat != "Economic" && ticket.ClassSeat != "FirstClass")
             {
                 throw new Exception("Invalid class seat. Only 'Economic' or 'FirstClass' are allowed.");
@@ -59,9 +58,7 @@ namespace Application.Services
         {
             var ticketFound = _ticketRepository.GetById(ticketId);
             if (ticketFound == null) throw new Exception("Ticket not found.");
-            var clietnFound = _userClientRepository.GetById(userId);
-            if (clietnFound == null) throw new Exception("User not found.");
-            if (ticketFound.User.Id == clietnFound.Id)
+            if (ticketFound.User.Id == userId)
             {
                 return _ticketRepository.Delete(ticketFound);
 
