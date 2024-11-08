@@ -8,7 +8,7 @@ namespace Domain.Entities
 {
     public class UserClient : User
     {
-        public string Name { get; set; }
+        
         public string LastName { get; set; }
         public string Nationality { get; set; }
         public int Dni {  get; set; }

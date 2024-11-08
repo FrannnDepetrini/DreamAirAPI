@@ -8,7 +8,7 @@ namespace Domain.Entities
 {
     public class UserAirline : User
     {
-        public string Name { get; set; }
+        
 
         public List<Flight> Flights { get; set; } = new List<Flight>();
     }

@@ -55,7 +55,8 @@ namespace Infrastructure.Services
             {
                 new Claim("sub", user.Id.ToString()),
                 new Claim("email", user.Email),
-                new Claim("role", user.Role)
+                new Claim("role", user.Role),
+                new Claim("name", user.Name)
             };
 
             var seccurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_options.SecretForKey));

@@ -14,6 +14,8 @@ namespace Domain.Entities
 
         public string Role { get; set; } = "client";
 
+        public string Name { get; set; }
+
        
     }
 }

@@ -44,6 +44,7 @@ namespace Infrastructure.Data
                 {
                     Id = 1,
                     Email = "admin@gmail.com",
+                    Name = "admin",
                     Password = HashGenerator.GenerateHash("admin"),
                     Role = "admin"
                 }
