@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Application.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,16 +32,16 @@ namespace Web.Controllers
         }
 
         [HttpPut("[action]")]
-        public IActionResult UpdateRole(string newRole, int id)
+        public IActionResult UpdateRole([FromBody] UserUpdateRequest role)
         {
             
-                return Ok(_userService.UpdateRole(newRole, id));
+                return Ok(_userService.UpdateRole(role));
 
         }
 
 
-        [HttpDelete("[action]")]
-        public IActionResult Delete(int id)
+        [HttpDelete("Delete/{id}")]
+        public IActionResult Delete([FromRoute]int id)
         {
             
                 return Ok(_userService.Delete(id));

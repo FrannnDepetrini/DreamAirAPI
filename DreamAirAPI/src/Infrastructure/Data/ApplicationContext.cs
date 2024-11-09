@@ -44,7 +44,8 @@ namespace Infrastructure.Data
                 {
                     Id = 1,
                     Email = "admin@gmail.com",
-                    Name = "admin",
+                    Name = "DreamAir",
+                    LastName = " ",
                     Password = HashGenerator.GenerateHash("admin"),
                     Role = "admin"
                 }
@@ -60,6 +61,7 @@ namespace Infrastructure.Data
                 {
                     Id = 2,
                     Name = "Emirates",
+                    LastName = " ",
                     Email = "Emirates@gmail.com",
                     Password = HashGenerator.GenerateHash("emirates"),
                     Role = "airline"
@@ -69,6 +71,7 @@ namespace Infrastructure.Data
                 {
                     Id = 3,
                     Name = "Flybondi",
+                    LastName = " ",
                     Email = "Flybondi@gmail.com",
                     Password = HashGenerator.GenerateHash("Flybondi"),
                     Role = "airline"
@@ -150,7 +153,7 @@ namespace Infrastructure.Data
                 } , new 
                 {
                     Id = 2,
-                    Travel = "IDAyVUELTA",
+                    Travel = "Idavuelta",
                     Departure= "Rosario (Ros)",
                     Arrival="Buenos Aires (Bsas)",
                     DateGo= new DateTime(2024,10,25),

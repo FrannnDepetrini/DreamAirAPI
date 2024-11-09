@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Models.Requests;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Application.Interfaces
         List<User> Get();
         User GetById(int id);
 
-        User UpdateRole(string newRole, int id);
+        User UpdateRole( UserUpdateRequest role);
 
         User Delete(int id);
     }

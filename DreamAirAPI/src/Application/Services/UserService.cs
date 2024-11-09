@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Application.Models.Requests;
 using Domain.Entities;
 using Domain.Interfaces;
 using System;
@@ -28,12 +29,12 @@ namespace Application.Services
            return _userRepository.GetById(id);
         }
 
-        public User UpdateRole(string newRole, int id) 
+        public User UpdateRole(UserUpdateRequest role) 
         {
-            var userFound = _userRepository.GetById(id);
+            var userFound = _userRepository.GetById(role.Id);
             if (userFound == null) throw new Exception("Not found");
 
-            return _userRepository.UpdateRole(userFound, newRole);
+            return _userRepository.UpdateRole(userFound, role.NewRole);
         }
 
         public User Delete(int id)
