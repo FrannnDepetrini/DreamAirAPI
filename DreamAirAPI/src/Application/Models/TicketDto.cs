@@ -17,6 +17,10 @@ namespace Application.Models
 
         public string FullName { get; set; }
         public int Dni { get; set; }
+
+        public string Travel { get; set; }
+        public string Departure { get; set; }
+        public string Arrival { get; set; }
         public string TimeDepartureGo { get; set; }
 
         public string TimeArrivalGo { get; set; }
@@ -42,6 +46,9 @@ namespace Application.Models
                 Price = ticket.Price,
                 FullName = $"{ticket.User.Name} {ticket.User.LastName}",
                 Dni = ticket.User.Dni,
+                Travel = ticket.Flight.Travel,
+                Departure = ticket.Flight.Departure,
+                Arrival = ticket.Flight.Arrival,
                 TimeDepartureGo = ticket.Flight.TimeDepartureGo,
                 TimeArrivalGo = ticket.Flight.TimeArrivalGo,
                 DateGo = ticket.Flight.DateGo,
